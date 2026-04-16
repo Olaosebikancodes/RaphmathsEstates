@@ -13,7 +13,6 @@ import Listings from "./pages/Listings";
 import PropertyDetail from "./pages/PropertyDetail";
 import Saved from "./pages/Saved";
 import About from "./pages/About";
-import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 
 function App() {
@@ -65,14 +64,6 @@ function App() {
                   element={
                     <PageTransition>
                       <About />
-                    </PageTransition>
-                  }
-                />
-                <Route
-                  path="/blog"
-                  element={
-                    <PageTransition>
-                      <Blog />
                     </PageTransition>
                   }
                 />
