@@ -1,0 +1,26 @@
+[
+  {
+    "id": "blog_001",
+    "title": "Why Awka is the Next Big Real Estate Destination",
+    "category": "Market Trends",
+    "date": "2026-03-25",
+    "excerpt": "Exploring the rapid development and investment opportunities in Anambra State's capital city.",
+    "image": "https://images.unsplash.com/photo-1549416801-6c38222956f4?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    "id": "blog_002",
+    "title": "5 Tips for First-Time Luxury Property Buyers",
+    "category": "Investment Tips",
+    "date": "2026-04-02",
+    "excerpt": "Navigating the high-end real estate market requires specialized knowledge and strategy.",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop"
+  },
+  {
+    "id": "blog_003",
+    "title": "The Rise of Eco-Friendly Architecture in Nigeria",
+    "category": "Architecture",
+    "date": "2026-04-10",
+    "excerpt": "How sustainable design is becoming a hallmark of modern luxury homes in Anambra State.",
+    "image": "https://images.unsplash.com/photo-1518005020250-6eb5f3f27522?q=80&w=1964&auto=format&fit=crop"
+  }
+]
