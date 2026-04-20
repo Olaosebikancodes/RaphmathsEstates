@@ -76,49 +76,84 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-background-surface border-b border-border p-6 md:hidden"
-          >
-            <div className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={cn(
-                    'text-lg font-inter font-medium',
-                    location.pathname === link.path ? 'text-primary-gold' : 'text-text-primary'
-                  )}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex items-center gap-6 pt-4 border-t border-border">
-                <Link
-                  to="/saved"
-                  className="flex items-center gap-2 text-text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Heart className="w-5 h-5" />
-                  <span>Saved</span>
-                </Link>
-                <Link
-                  to="/listings"
-                  className="flex items-center gap-2 text-primary-gold font-bold"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Search className="w-5 h-5" />
-                  <span>Search</span>
-                </Link>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-background/80 backdrop-blur-md z-[60] md:hidden"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-background-surface z-[70] shadow-2xl p-8 md:hidden"
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-12">
+                  <h2 className="text-xl font-playfair font-bold text-primary-gold">
+                    Navigation
+                  </h2>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 text-text-secondary hover:text-text-primary"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className={cn(
+                        "text-xl font-inter font-medium tracking-wide transition-colors",
+                        location.pathname === link.path
+                          ? "text-primary-gold"
+                          : "text-text-primary",
+                      )}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-auto pt-8 border-t border-border flex flex-col gap-6">
+                  <Link
+                    to="/saved"
+                    className="flex items-center gap-4 text-text-primary group"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <div className="w-10 h-10 bg-background flex items-center justify-center rounded-sm">
+                      <Heart className="w-5 h-5 text-primary-gold" />
+                    </div>
+                    <span className="font-bold text-xs uppercase tracking-widest">
+                      Saved Properties
+                    </span>
+                  </Link>
+                  <Link
+                    to="/listings"
+                    className="flex items-center gap-4 text-background group"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <div className="flex-1 bg-primary-gold flex items-center justify-center gap-3 py-4 rounded-sm shadow-lg shadow-primary-gold/20">
+                      <Search className="w-4 h-4" />
+                      <span className="font-bold text-xs uppercase tracking-widest">
+                        Browse Listings
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

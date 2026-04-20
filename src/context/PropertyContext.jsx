@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { supabase } from "../lib/supabase";
+import { useToast } from "./ToastContext";
 
 const PropertyContext = createContext();
 
@@ -13,6 +14,7 @@ export const PropertyProvider = ({ children }) => {
   const [properties, setProperties] = useState([]);
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
 
   const fetchInitialData = useCallback(async () => {
     try {
@@ -42,10 +44,11 @@ export const PropertyProvider = ({ children }) => {
       setProperties(mappedProperties);
     } catch (err) {
       console.error("Error fetching data from Supabase:", err.message);
+      showToast("Failed to load property data. Please refresh.", "error");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [showToast]);
 
   useEffect(() => {
     fetchInitialData();

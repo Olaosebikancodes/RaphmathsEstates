@@ -491,21 +491,56 @@ const Listings = () => {
                     Location
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
-                    {["All", "Awka", "Onitsha", "Nnewi", "Ekwulobia"].map(
-                      (city) => (
+                    {[
+                      "All",
+                      "Awka",
+                      "Onitsha",
+                      "Nnewi",
+                      "Ekwulobia",
+                      "Ihiala",
+                      "Ozubulu",
+                      "Obosi",
+                      "Nkpor",
+                      "Ogidi",
+                      "Umunze",
+                    ].map((city) => (
+                      <button
+                        key={city}
+                        onClick={() =>
+                          handleFilterChange("city", city.toLowerCase())
+                        }
+                        className={cn(
+                          "px-4 py-3 border border-border text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm",
+                          filters.city === city.toLowerCase()
+                            ? "bg-primary-gold border-primary-gold text-background shadow-md"
+                            : "text-text-secondary hover:border-primary-gold",
+                        )}
+                      >
+                        {city}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Property Type */}
+                <div>
+                  <h4 className="label-caps text-primary-gold mb-6">
+                    Property Type
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    {["all", "duplex", "terrace", "villa", "apartment"].map(
+                      (type) => (
                         <button
-                          key={city}
-                          onClick={() =>
-                            handleFilterChange("city", city.toLowerCase())
-                          }
+                          key={type}
+                          onClick={() => handleFilterChange("type", type)}
                           className={cn(
-                            "py-2 px-4 border border-border text-xs font-medium transition-all rounded-sm",
-                            filters.city === city.toLowerCase()
+                            "px-4 py-3 border border-border text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm",
+                            filters.type === type
                               ? "bg-primary-gold border-primary-gold text-background"
                               : "text-text-secondary",
                           )}
                         >
-                          {city}
+                          {type}
                         </button>
                       ),
                     )}
@@ -514,9 +549,12 @@ const Listings = () => {
 
                 {/* Price Range */}
                 <div>
-                  <h4 className="label-caps text-primary-gold mb-6">
-                    Max Price: ₦{filters.maxPrice.toLocaleString()}
-                  </h4>
+                  <div className="flex items-center justify-between mb-6">
+                    <h4 className="label-caps text-primary-gold">Price Range</h4>
+                    <span className="text-[10px] text-text-secondary">
+                      Max: 200M
+                    </span>
+                  </div>
                   <input
                     type="range"
                     min="0"
@@ -526,26 +564,50 @@ const Listings = () => {
                     onChange={(e) =>
                       handleFilterChange("maxPrice", parseInt(e.target.value))
                     }
-                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary-gold"
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary-gold mb-4"
                   />
+                  <div className="text-sm font-inter font-bold text-text-primary">
+                    Up to ₦{filters.maxPrice.toLocaleString()}
+                  </div>
                 </div>
 
-                <button
-                  onClick={() => {
-                    clearFilters();
-                    setIsSidebarOpen(false);
-                  }}
-                  className="w-full py-4 bg-background border border-border text-text-primary font-bold text-xs uppercase tracking-widest hover:border-primary-gold transition-colors mt-8"
-                >
-                  Clear All
-                </button>
+                {/* Bedrooms */}
+                <div>
+                  <h4 className="label-caps text-primary-gold mb-6">
+                    Min Bedrooms
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["all", "1", "2", "3", "4", "5+"].map((val) => (
+                      <button
+                        key={val}
+                        onClick={() => handleFilterChange("bedrooms", val)}
+                        className={cn(
+                          "w-12 h-12 border border-border text-xs font-bold transition-all rounded-sm",
+                          filters.bedrooms === val
+                            ? "bg-primary-gold border-primary-gold text-background shadow-md"
+                            : "text-text-secondary hover:border-primary-gold",
+                        )}
+                      >
+                        {val}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-                <button
-                  onClick={() => setIsSidebarOpen(false)}
-                  className="w-full py-4 bg-primary-gold text-background font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors"
-                >
-                  Apply Filters
-                </button>
+                <div className="pt-8 border-t border-border flex flex-col gap-4">
+                  <button
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="w-full bg-primary-gold text-background py-4 font-bold text-xs uppercase tracking-widest rounded-sm shadow-xl shadow-primary-gold/20"
+                  >
+                    Apply Filters
+                  </button>
+                  <button
+                    onClick={clearFilters}
+                    className="w-full py-4 font-bold text-[10px] label-caps text-text-secondary uppercase tracking-widest border border-border rounded-sm"
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>

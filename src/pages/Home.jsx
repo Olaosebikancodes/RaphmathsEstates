@@ -127,21 +127,21 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-background-surface/80 backdrop-blur-xl border border-border p-2 md:p-4 rounded-sm max-w-4xl mx-auto shadow-2xl"
+            className="bg-background-surface/80 backdrop-blur-xl border border-border p-2 md:p-4 rounded-sm max-w-4xl mx-auto shadow-2xl mt-8 md:mt-0"
           >
-            <div className="flex flex-col md:flex-row items-stretch gap-4">
-              <div className="flex-1 flex items-center gap-4 px-4 border-b md:border-b-0 md:border-r border-border py-2 md:py-0">
+            <div className="flex flex-col md:flex-row items-stretch gap-2 md:gap-4">
+              <div className="flex-1 flex items-center gap-4 px-4 border border-border md:border-0 md:border-r border-border py-4 md:py-0 rounded-sm md:rounded-none">
                 <Search className="text-primary-gold w-5 h-5 flex-shrink-0" />
                 <input
                   type="text"
-                  placeholder="Location, Area, or Property ID..."
+                  placeholder="Location or Property ID..."
                   className="bg-transparent border-none outline-none text-text-primary placeholder:text-text-secondary w-full text-sm font-inter"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                 />
               </div>
-              <div className="md:w-48 px-4 flex items-center gap-4 py-2 md:py-0">
+              <div className="md:w-48 px-4 flex items-center gap-4 border border-border md:border-0 py-4 md:py-0 rounded-sm md:rounded-none">
                 <select
                   className="bg-transparent border-none outline-none text-text-primary text-sm font-inter w-full cursor-pointer"
                   value={searchCity}
@@ -166,7 +166,7 @@ const Home = () => {
               </div>
               <button
                 onClick={handleSearch}
-                className="bg-primary-gold text-background px-8 py-3 font-inter font-bold text-sm tracking-wider uppercase hover:bg-primary-lightGold transition-all duration-300"
+                className="bg-primary-gold text-background px-8 py-5 md:py-3 font-inter font-bold text-xs md:text-sm tracking-wider uppercase hover:bg-primary-lightGold transition-all duration-300 rounded-sm"
               >
                 Search Properties
               </button>

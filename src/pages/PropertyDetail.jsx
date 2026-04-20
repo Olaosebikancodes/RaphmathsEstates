@@ -24,9 +24,10 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useProperties } from "../context/PropertyContext";
 import { useFavorites } from "../context/FavoritesContext";
+import { useToast } from "../context/ToastContext";
 import PropertyCard from "../components/PropertyCard";
 import { cn } from "../utils/cn";
-import { trackPropertyClick } from "../lib/supabase";
+import { trackPropertyClick, getUser } from "../lib/supabase";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
@@ -40,8 +41,8 @@ const PropertyDetail = () => {
   const { id } = useParams();
   const { getPropertyById, properties } = useProperties();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { showToast } = useToast();
   const [activeImage, setActiveImage] = useState(0);
-  const [isCopied, setIsCopied] = useState(false);
   const [property, setProperty] = useState(null);
   const [isAdminView, setIsAdminView] = useState(false);
   const navigate = useNavigate();
@@ -76,11 +77,11 @@ const PropertyDetail = () => {
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
+        showToast("Link copied to clipboard!", "success");
       }
     } catch (err) {
       console.error("Error sharing:", err);
+      showToast("Failed to share property", "error");
     }
   };
 
@@ -140,18 +141,6 @@ const PropertyDetail = () => {
               >
                 <Share2 className="w-4 h-4" />
               </button>
-              <AnimatePresence>
-                {isCopied && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary-gold text-background text-[10px] font-bold rounded-sm whitespace-nowrap"
-                  >
-                    Link Copied!
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -264,7 +253,7 @@ const PropertyDetail = () => {
                     )}
                   </span>
                 </div>
-                <div className="flex items-center gap-8 sm:gap-12">
+                <div className="flex flex-wrap items-center gap-6 sm:gap-12">
                   <div className="flex flex-col gap-1">
                     <span className="label-caps text-[10px] text-text-secondary">
                       Bedrooms

@@ -23,13 +23,11 @@ const AdminAuth = () => {
   const [inviteCode, setInviteCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [requestingCode, setRequestingCode] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { showToast } = useToast();
 
   const handleRequestCode = async () => {
     setRequestingCode(true);
-    setError(null);
     try {
       // Generate a random 8-character alphanumeric code
       const newCode = Math.random().toString(36).substring(2, 10).toUpperCase();
@@ -76,7 +74,7 @@ const AdminAuth = () => {
         err.error_description ||
         JSON.stringify(err) ||
         "Unknown error occurred";
-      setError(`Failed to generate or send code: ${errorMsg}`);
+      showToast(`Failed to generate or send code: ${errorMsg}`, "error");
     } finally {
       setRequestingCode(false);
     }
@@ -101,7 +99,6 @@ const AdminAuth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
       if (isLogin) {
@@ -145,7 +142,7 @@ const AdminAuth = () => {
         setIsLogin(true);
       }
     } catch (err) {
-      setError(err.message);
+      showToast(err.message, "error");
     } finally {
       setLoading(false);
     }
@@ -173,12 +170,6 @@ const AdminAuth = () => {
               : "Join our elite team of experts."}
           </p>
         </div>
-
-        {error && (
-          <div className="mb-6 p-4 bg-status-error/10 border border-status-error/20 text-status-error text-xs font-bold rounded-sm">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">

@@ -26,7 +26,7 @@ CREATE TABLE properties (
   images TEXT[],
   description TEXT,
   amenities TEXT[],
-  agent_id TEXT REFERENCES agents(id),
+  agent_id TEXT REFERENCES agents(id) ON DELETE SET NULL,
   featured BOOLEAN DEFAULT FALSE,
   date_added DATE DEFAULT CURRENT_DATE,
   created_at TIMESTAMPTZ DEFAULT NOW()
@@ -52,8 +52,18 @@ CREATE POLICY "Public Read Properties" ON properties FOR SELECT USING (true);
 CREATE POLICY "Public Insert Clicks" ON property_clicks FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public Read Clicks" ON property_clicks FOR SELECT USING (true);
 
--- Admin Policies (Placeholder - you'll need to set up auth for this)
--- Example: CREATE POLICY "Admin All Agents" ON agents FOR ALL USING (auth.role() = 'authenticated');
+-- Admin Policies (Full access for authenticated users)
+CREATE POLICY "Admin All Agents" ON agents FOR ALL 
+  USING (auth.role() = 'authenticated') 
+  WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Admin All Properties" ON properties FOR ALL 
+  USING (auth.role() = 'authenticated') 
+  WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Admin All Clicks" ON property_clicks FOR ALL 
+  USING (auth.role() = 'authenticated') 
+  WITH CHECK (auth.role() = 'authenticated');
 
 -- Create Admin Invites Table (for registration codes)
 CREATE TABLE admin_invites (
