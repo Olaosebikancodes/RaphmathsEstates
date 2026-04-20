@@ -54,3 +54,31 @@ CREATE POLICY "Public Read Clicks" ON property_clicks FOR SELECT USING (true);
 
 -- Admin Policies (Placeholder - you'll need to set up auth for this)
 -- Example: CREATE POLICY "Admin All Agents" ON agents FOR ALL USING (auth.role() = 'authenticated');
+
+-- Create Admin Invites Table (for registration codes)
+CREATE TABLE admin_invites (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  code TEXT NOT NULL UNIQUE,
+  is_used BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS for Admin Invites
+ALTER TABLE admin_invites ENABLE ROW LEVEL SECURITY;
+
+-- Allow anyone to insert a new code (to request registration)
+-- In a production app, you might want to rate limit this or restrict it.
+CREATE POLICY "Allow public insert to admin_invites" 
+ON admin_invites FOR INSERT 
+WITH CHECK (true);
+
+-- Allow public to read their own code for verification during signup
+CREATE POLICY "Allow public select from admin_invites" 
+ON admin_invites FOR SELECT 
+USING (true);
+
+-- Allow updates (marking as used)
+CREATE POLICY "Allow public update to admin_invites" 
+ON admin_invites FOR UPDATE 
+USING (true) 
+WITH CHECK (true);

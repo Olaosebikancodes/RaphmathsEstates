@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, UserPlus, X, Upload } from "lucide-react";
 import { useProperties } from "../context/PropertyContext";
 import { cn } from "../utils/cn";
+import { useToast } from "../context/ToastContext";
 
 const AddAgent = () => {
   const { addAgent } = useProperties();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,7 +55,7 @@ const AddAgent = () => {
       };
       reader.readAsDataURL(file);
     } catch (err) {
-      alert("Error uploading photo: " + err.message);
+      showToast("Error uploading photo: " + err.message, "error");
       setUploading(false);
     }
   };
@@ -67,13 +69,13 @@ const AddAgent = () => {
         id: `agent_${Date.now()}`,
       };
       await addAgent(agentData);
+      showToast("Agent registered successfully!", "success");
       navigate("/admin");
     } catch (err) {
       const errorMsg = err.message || "Unknown error occurred";
-      alert(
-        "Error adding agent to database: " +
-          errorMsg +
-          "\n\nTip: Ensure RLS policies are correctly set for the 'agents' table.",
+      showToast(
+        "Error adding agent: " + errorMsg,
+        "error"
       );
     } finally {
       setLoading(false);

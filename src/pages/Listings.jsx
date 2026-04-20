@@ -233,8 +233,19 @@ const Listings = () => {
               <div>
                 <h4 className="label-caps text-primary-gold mb-6">Location</h4>
                 <div className="flex flex-col gap-3">
-                  {["All", "Awka", "Onitsha", "Nnewi", "Ekwulobia"].map(
-                    (city) => (
+                  {[
+                    "All",
+                    "Awka",
+                    "Onitsha",
+                    "Nnewi",
+                    "Ekwulobia",
+                    "Ihiala",
+                    "Ozubulu",
+                    "Obosi",
+                    "Nkpor",
+                    "Ogidi",
+                    "Umunze",
+                  ].map((city) => (
                       <label
                         key={city}
                         className="flex items-center gap-3 cursor-pointer group"

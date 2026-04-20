@@ -131,6 +131,22 @@ const Footer = () => {
                 Ekwulobia Luxury
               </Link>
             </li>
+            <li>
+              <Link
+                to="/listings?city=Ihiala"
+                className="hover:text-primary-gold transition-colors"
+              >
+                Ihiala Premium
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/listings?city=Ozubulu"
+                className="hover:text-primary-gold transition-colors"
+              >
+                Ozubulu Estates
+              </Link>
+            </li>
           </ul>
         </div>
 

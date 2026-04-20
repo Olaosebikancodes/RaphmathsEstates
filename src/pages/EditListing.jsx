@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Save, X, Upload } from "lucide-react";
 import { useProperties } from "../context/PropertyContext";
 import { cn } from "../utils/cn";
+import { useToast } from "../context/ToastContext";
 
 const EditListing = () => {
   const {
@@ -13,6 +14,7 @@ const EditListing = () => {
   } = useProperties();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(null);
 
@@ -82,7 +84,7 @@ const EditListing = () => {
       };
       reader.readAsDataURL(file);
     } catch (err) {
-      alert("Error uploading file: " + err.message);
+      showToast("Error uploading file: " + err.message, "error");
       setUploading(false);
     }
   };
@@ -107,14 +109,11 @@ const EditListing = () => {
         size: Number(formData.size),
       };
       await updateProperty(id, finalProperty);
+      showToast("Listing updated successfully!", "success");
       navigate("/admin");
     } catch (err) {
       const errorMsg = err.message || "Unknown error occurred";
-      alert(
-        "Error updating property in database: " +
-          errorMsg +
-          "\n\nTip: Ensure RLS policies are enabled for 'authenticated' users.",
-      );
+      showToast("Error updating property: " + errorMsg, "error");
     } finally {
       setLoading(false);
     }
@@ -232,6 +231,13 @@ const EditListing = () => {
                   <option value="Awka">Awka</option>
                   <option value="Onitsha">Onitsha</option>
                   <option value="Nnewi">Nnewi</option>
+                  <option value="Ekwulobia">Ekwulobia</option>
+                  <option value="Ihiala">Ihiala</option>
+                  <option value="Ozubulu">Ozubulu</option>
+                  <option value="Obosi">Obosi</option>
+                  <option value="Nkpor">Nkpor</option>
+                  <option value="Ogidi">Ogidi</option>
+                  <option value="Umunze">Umunze</option>
                 </select>
               </div>
               <div className="space-y-2">

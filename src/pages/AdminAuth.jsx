@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   Mail,
   Lock,
@@ -12,6 +13,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { signIn, signUp, supabase } from "../lib/supabase";
 import { cn } from "../utils/cn";
+import { useToast } from "../context/ToastContext";
 
 const AdminAuth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -23,6 +25,7 @@ const AdminAuth = () => {
   const [requestingCode, setRequestingCode] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleRequestCode = async () => {
     setRequestingCode(true);
@@ -37,20 +40,43 @@ const AdminAuth = () => {
 
       if (insertError) throw insertError;
 
-      // In a real app, this would trigger an email via Supabase Edge Functions or a Webhook.
-      // Since I can't set up an email provider for you, we simulate it here.
-      console.log(
-        `Code ${newCode} generated and "sent" to olaosebikani345@gmail.com`,
-      );
-      alert(
-        `Code Generated: ${newCode}\n\nNote: In a real scenario, this code would be sent to olaosebikani345@gmail.com. Since we are in development, please use the code above to register.`,
-      );
+      // Email configuration
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const adminEmail =
+        import.meta.env.VITE_ADMIN_EMAIL || "olaosebikani345@gmail.com";
+
+      if (serviceId && templateId && publicKey) {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            to_email: adminEmail,
+            message: `A new admin access code has been generated: ${newCode}`,
+            code: newCode,
+            app_name: "Raphmaths Estates",
+          },
+          publicKey,
+        );
+
+        showToast(`Code Sent! Please contact the main admin.`, "success");
+      } else {
+        // Fallback if EmailJS is not configured
+        console.log(`Code: ${newCode} (EmailJS not configured)`);
+        showToast(
+          `Code Generated: ${newCode}. Please contact main admin.`,
+          "success",
+        );
+      }
     } catch (err) {
-      const errorMsg = err.message || "Unknown error occurred";
-      setError(
-        `Failed to generate code: ${errorMsg}\n\nTip: Ensure the 'admin_invites' table exists and RLS allows public inserts.`,
-      );
-      console.error(err);
+      console.error("Full Error Object:", err);
+      const errorMsg =
+        err.message ||
+        err.error_description ||
+        JSON.stringify(err) ||
+        "Unknown error occurred";
+      setError(`Failed to generate or send code: ${errorMsg}`);
     } finally {
       setRequestingCode(false);
     }
@@ -112,7 +138,10 @@ const AdminAuth = () => {
           .update({ is_used: true })
           .eq("id", invite.id);
 
-        alert("Verification email sent! Please check your inbox.");
+        showToast(
+          "Account created successfully! You can now login.",
+          "success",
+        );
         setIsLogin(true);
       }
     } catch (err) {

@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, X, Upload } from "lucide-react";
 import { useProperties } from "../context/PropertyContext";
 import { cn } from "../utils/cn";
+import { useToast } from "../context/ToastContext";
 
 const AddListing = () => {
   const { addProperty, agents } = useProperties();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -80,7 +82,7 @@ const AddListing = () => {
       };
       reader.readAsDataURL(file);
     } catch (err) {
-      alert("Error uploading file: " + err.message);
+      showToast("Error uploading file: " + err.message, "error");
       setUploading(false);
     }
   };
@@ -108,14 +110,11 @@ const AddListing = () => {
         date_added: new Date().toISOString().split("T")[0],
       };
       await addProperty(propertyData);
+      showToast("Property added successfully!", "success");
       navigate("/admin");
     } catch (err) {
       const errorMsg = err.message || "Unknown error occurred";
-      alert(
-        "Error adding property to database: " +
-          errorMsg +
-          "\n\nTip: Ensure you have run the SQL schema and RLS policies in your Supabase dashboard.",
-      );
+      showToast("Error adding property: " + errorMsg, "error");
     } finally {
       setLoading(false);
     }
@@ -233,6 +232,13 @@ const AddListing = () => {
                   <option value="Awka">Awka</option>
                   <option value="Onitsha">Onitsha</option>
                   <option value="Nnewi">Nnewi</option>
+                  <option value="Ekwulobia">Ekwulobia</option>
+                  <option value="Ihiala">Ihiala</option>
+                  <option value="Ozubulu">Ozubulu</option>
+                  <option value="Obosi">Obosi</option>
+                  <option value="Nkpor">Nkpor</option>
+                  <option value="Ogidi">Ogidi</option>
+                  <option value="Umunze">Umunze</option>
                 </select>
               </div>
               <div className="space-y-2">

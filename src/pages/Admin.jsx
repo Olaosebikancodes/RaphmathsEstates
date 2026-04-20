@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { motion, AnimatePresence } from "framer-motion";
 import { getUser, signOut, supabase } from "../lib/supabase";
+import { useToast } from "../context/ToastContext";
 
 const Admin = () => {
   const { properties, agents, fetchInitialData, deleteProperty, deleteAgent } =
@@ -24,6 +25,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [clicksData, setClicksData] = useState({});
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -62,8 +64,9 @@ const Admin = () => {
       return;
     try {
       await deleteProperty(id);
+      showToast("Listing deleted successfully", "success");
     } catch (err) {
-      alert("Error deleting property: " + err.message);
+      showToast("Error deleting property: " + err.message, "error");
     }
   };
 
@@ -76,8 +79,9 @@ const Admin = () => {
       return;
     try {
       await deleteAgent(id);
+      showToast("Agent deleted successfully", "success");
     } catch (err) {
-      alert("Error deleting agent: " + err.message);
+      showToast("Error deleting agent: " + err.message, "error");
     }
   };
 
@@ -240,6 +244,13 @@ const Admin = () => {
                   <option>Awka</option>
                   <option>Onitsha</option>
                   <option>Nnewi</option>
+                  <option>Ekwulobia</option>
+                  <option>Ihiala</option>
+                  <option>Ozubulu</option>
+                  <option>Obosi</option>
+                  <option>Nkpor</option>
+                  <option>Ogidi</option>
+                  <option>Umunze</option>
                 </select>
               </div>
             )}

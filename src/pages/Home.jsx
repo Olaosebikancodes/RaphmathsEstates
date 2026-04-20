@@ -41,22 +41,32 @@ const Home = () => {
     {
       name: "Awka",
       count: getCityCount("Awka"),
-      image: "/img/loc-asaba.jpg",
+      image: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Onitsha",
       count: getCityCount("Onitsha"),
-      image: "/img/loc-warri.jpg",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Nnewi",
       count: getCityCount("Nnewi"),
-      image: "/img/loc-effurun.jpg",
+      image: "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Ekwulobia",
       count: getCityCount("Ekwulobia"),
-      image: "/img/loc-sapele.jpg",
+      image: "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
+    },
+    {
+      name: "Ihiala",
+      count: getCityCount("Ihiala"),
+      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
+    },
+    {
+      name: "Ozubulu",
+      count: getCityCount("Ozubulu"),
+      image: "https://images.unsplash.com/photo-1542362567-b05500282c14?q=80&w=2070&auto=format&fit=crop",
     },
   ];
 
