@@ -17,6 +17,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import AdminAuth from "./pages/AdminAuth";
+import AddListing from "./pages/AddListing";
+import EditListing from "./pages/EditListing";
+import AddAgent from "./pages/AddAgent";
 
 function App() {
   const location = useLocation();
@@ -92,6 +95,30 @@ function App() {
                   element={
                     <PageTransition>
                       <AdminAuth />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="/admin/add-listing"
+                  element={
+                    <PageTransition>
+                      <AddListing />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="/admin/edit-listing/:id"
+                  element={
+                    <PageTransition>
+                      <EditListing />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="/admin/add-agent"
+                  element={
+                    <PageTransition>
+                      <AddAgent />
                     </PageTransition>
                   }
                 />

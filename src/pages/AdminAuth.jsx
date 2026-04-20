@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, UserPlus, LogIn, ArrowLeft, Shield } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  UserPlus,
+  LogIn,
+  ArrowLeft,
+  Shield,
+  Key,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { signIn, signUp } from "../lib/supabase";
+import { signIn, signUp, supabase } from "../lib/supabase";
 import { cn } from "../utils/cn";
 
 const AdminAuth = () => {
@@ -10,9 +18,43 @@ const AdminAuth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [requestingCode, setRequestingCode] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const handleRequestCode = async () => {
+    setRequestingCode(true);
+    setError(null);
+    try {
+      // Generate a random 8-character alphanumeric code
+      const newCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+
+      const { error: insertError } = await supabase
+        .from("admin_invites")
+        .insert([{ code: newCode, is_used: false }]);
+
+      if (insertError) throw insertError;
+
+      // In a real app, this would trigger an email via Supabase Edge Functions or a Webhook.
+      // Since I can't set up an email provider for you, we simulate it here.
+      console.log(
+        `Code ${newCode} generated and "sent" to olaosebikani345@gmail.com`,
+      );
+      alert(
+        `Code Generated: ${newCode}\n\nNote: In a real scenario, this code would be sent to olaosebikani345@gmail.com. Since we are in development, please use the code above to register.`,
+      );
+    } catch (err) {
+      const errorMsg = err.message || "Unknown error occurred";
+      setError(
+        `Failed to generate code: ${errorMsg}\n\nTip: Ensure the 'admin_invites' table exists and RLS allows public inserts.`,
+      );
+      console.error(err);
+    } finally {
+      setRequestingCode(false);
+    }
+  };
 
   const validatePassword = (pass) => {
     const minLength = 8;
@@ -41,14 +83,35 @@ const AdminAuth = () => {
         if (error) throw error;
         navigate("/admin");
       } else {
+        // Verify Invitation Code
+        const { data: invite, error: inviteError } = await supabase
+          .from("admin_invites")
+          .select("*")
+          .eq("code", inviteCode)
+          .eq("is_used", false)
+          .single();
+
+        if (inviteError || !invite) {
+          throw new Error(
+            "Invalid or expired One-Time Code. Please contact the main admin.",
+          );
+        }
+
         if (password !== confirmPassword) {
           throw new Error("Passwords do not match.");
         }
         const strengthError = validatePassword(password);
         if (strengthError) throw new Error(strengthError);
 
-        const { error } = await signUp(email, password);
-        if (error) throw error;
+        const { error: signUpError } = await signUp(email, password);
+        if (signUpError) throw signUpError;
+
+        // Mark code as used
+        await supabase
+          .from("admin_invites")
+          .update({ is_used: true })
+          .eq("id", invite.id);
+
         alert("Verification email sent! Please check your inbox.");
         setIsLogin(true);
       }
@@ -144,6 +207,38 @@ const AdminAuth = () => {
                   className="w-full bg-background border border-border pl-12 pr-4 py-4 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
                 />
               </div>
+            </div>
+          )}
+
+          {!isLogin && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <label className="label-caps text-[10px] text-text-secondary">
+                  One-Time Admin Code
+                </label>
+                <button
+                  type="button"
+                  disabled={requestingCode}
+                  onClick={handleRequestCode}
+                  className="text-[9px] font-bold text-primary-gold uppercase hover:underline disabled:opacity-50"
+                >
+                  {requestingCode ? "Requesting..." : "Get Code"}
+                </button>
+              </div>
+              <div className="relative group">
+                <Key className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary group-focus-within:text-primary-gold transition-colors" />
+                <input
+                  type="text"
+                  required
+                  value={inviteCode}
+                  onChange={(e) => setInviteCode(e.target.value)}
+                  placeholder="Enter code from main admin"
+                  className="w-full bg-background border border-border pl-12 pr-4 py-4 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                />
+              </div>
+              <p className="text-[9px] text-text-secondary opacity-60">
+                Contact olaosebikani345@gmail.com for your access code.
+              </p>
             </div>
           )}
 

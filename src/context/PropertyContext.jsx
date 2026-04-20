@@ -65,14 +65,109 @@ export const PropertyProvider = ({ children }) => {
     [properties, agents],
   );
 
+  const addProperty = useCallback(
+    async (property) => {
+      try {
+        const { error } = await supabase.from("properties").insert([property]);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error adding property:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
+  const updateProperty = useCallback(
+    async (id, property) => {
+      try {
+        const { error } = await supabase
+          .from("properties")
+          .update(property)
+          .eq("id", id);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error updating property:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
+  const deleteProperty = useCallback(
+    async (id) => {
+      try {
+        const { error } = await supabase
+          .from("properties")
+          .delete()
+          .eq("id", id);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error deleting property:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
+  const addAgent = useCallback(
+    async (agent) => {
+      try {
+        const { error } = await supabase.from("agents").insert([agent]);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error adding agent:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
+  const updateAgent = useCallback(
+    async (id, agent) => {
+      try {
+        const { error } = await supabase
+          .from("agents")
+          .update(agent)
+          .eq("id", id);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error updating agent:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
+  const deleteAgent = useCallback(
+    async (id) => {
+      try {
+        const { error } = await supabase.from("agents").delete().eq("id", id);
+        if (error) throw error;
+        await fetchInitialData();
+      } catch (err) {
+        console.error("Error deleting agent:", err.message);
+        throw err;
+      }
+    },
+    [fetchInitialData],
+  );
+
   const getAgentById = useCallback(
     (id) => agents.find((a) => a.id === id),
     [agents],
   );
+
   const getFeaturedProperties = useCallback(
     () => properties.filter((p) => p.featured),
     [properties],
   );
+
   const getPropertiesByCity = useCallback(
     (city) =>
       properties.filter(
@@ -92,6 +187,12 @@ export const PropertyProvider = ({ children }) => {
         getAgentById,
         getFeaturedProperties,
         getPropertiesByCity,
+        addProperty,
+        updateProperty,
+        deleteProperty,
+        addAgent,
+        updateAgent,
+        deleteAgent,
       }}
     >
       {children}
