@@ -84,18 +84,10 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                to="/blog"
+                to="/admin"
                 className="hover:text-primary-gold transition-colors"
               >
-                Market Updates
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/saved"
-                className="hover:text-primary-gold transition-colors"
-              >
-                Saved Properties
+                Agent Dashboard
               </Link>
             </li>
           </ul>

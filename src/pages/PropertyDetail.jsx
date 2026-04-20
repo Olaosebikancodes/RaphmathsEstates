@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   MapPin,
   Bed,
@@ -14,6 +14,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowLeft,
+  Instagram,
+  Twitter,
+  Facebook,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -23,6 +26,7 @@ import { useProperties } from "../context/PropertyContext";
 import { useFavorites } from "../context/FavoritesContext";
 import PropertyCard from "../components/PropertyCard";
 import { cn } from "../utils/cn";
+import { trackPropertyClick } from "../lib/supabase";
 
 // Custom Marker Icon
 const customIcon = new L.Icon({
@@ -39,12 +43,23 @@ const PropertyDetail = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
   const [property, setProperty] = useState(null);
+  const [isAdminView, setIsAdminView] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const checkAdmin = async () => {
+      const {
+        data: { user },
+      } = await getUser();
+      if (user) setIsAdminView(true);
+    };
+    checkAdmin();
+
     const found = getPropertyById(id);
     if (found) {
       setProperty(found);
       window.scrollTo(0, 0);
+      trackPropertyClick(id);
     }
   }, [id, getPropertyById]);
 
@@ -99,13 +114,13 @@ const PropertyDetail = () => {
       {/* Top Bar */}
       <div className="pt-24 md:pt-32 px-6 md:px-12 mb-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link
-            to="/listings"
+          <button
+            onClick={() => navigate(isAdminView ? "/admin" : "/listings")}
             className="flex items-center gap-2 text-text-secondary hover:text-primary-gold transition-colors font-inter text-sm font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Collection
-          </Link>
+            {isAdminView ? "Back to Dashboard" : "Back to Collection"}
+          </button>
           <div className="flex items-center gap-4">
             <button
               onClick={() => toggleFavorite(property.id)}
@@ -232,15 +247,15 @@ const PropertyDetail = () => {
                   {property.location.area}, {property.location.city}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-text-primary mb-6">
                 {property.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-12 py-8 border-y border-border">
-                <div className="flex flex-col gap-1">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-6 md:gap-12 py-8 border-y border-border">
+                <div className="flex flex-col gap-1 w-full sm:w-auto">
                   <span className="label-caps text-[10px] text-text-secondary">
                     Price
                   </span>
-                  <span className="price-tag text-3xl font-bold">
+                  <span className="price-tag text-2xl md:text-3xl font-bold">
                     ₦{property.price.toLocaleString()}
                     {property.status === "rent" && (
                       <span className="text-sm font-normal text-text-secondary ml-1">
@@ -249,37 +264,39 @@ const PropertyDetail = () => {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <span className="label-caps text-[10px] text-text-secondary">
-                    Bedrooms
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <Bed className="w-5 h-5 text-primary-gold" />
-                    <span className="text-xl font-playfair font-bold text-text-primary">
-                      {property.bedrooms}
+                <div className="flex items-center gap-8 sm:gap-12">
+                  <div className="flex flex-col gap-1">
+                    <span className="label-caps text-[10px] text-text-secondary">
+                      Bedrooms
                     </span>
+                    <div className="flex items-center gap-2">
+                      <Bed className="w-5 h-5 text-primary-gold" />
+                      <span className="text-xl font-playfair font-bold text-text-primary">
+                        {property.bedrooms}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="label-caps text-[10px] text-text-secondary">
-                    Bathrooms
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <Bath className="w-5 h-5 text-primary-gold" />
-                    <span className="text-xl font-playfair font-bold text-text-primary">
-                      {property.bathrooms}
+                  <div className="flex flex-col gap-1">
+                    <span className="label-caps text-[10px] text-text-secondary">
+                      Bathrooms
                     </span>
+                    <div className="flex items-center gap-2">
+                      <Bath className="w-5 h-5 text-primary-gold" />
+                      <span className="text-xl font-playfair font-bold text-text-primary">
+                        {property.bathrooms}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="label-caps text-[10px] text-text-secondary">
-                    Property Size
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <Maximize className="w-5 h-5 text-primary-gold" />
-                    <span className="text-xl font-playfair font-bold text-text-primary">
-                      {property.size} sqm
+                  <div className="flex flex-col gap-1">
+                    <span className="label-caps text-[10px] text-text-secondary">
+                      Property Size
                     </span>
+                    <div className="flex items-center gap-2">
+                      <Maximize className="w-5 h-5 text-primary-gold" />
+                      <span className="text-xl font-playfair font-bold text-text-primary">
+                        {property.size} sqm
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -370,8 +387,42 @@ const PropertyDetail = () => {
                       {property.agent.name}
                     </h4>
                     <p className="label-caps text-[10px] text-primary-gold font-bold">
-                      Luxury Property Expert
+                      {property.agent.role || "Luxury Property Expert"}
                     </p>
+                    {property.agent.social && (
+                      <div className="flex items-center gap-3 mt-3">
+                        {property.agent.social.instagram && (
+                          <a
+                            href={property.agent.social.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-primary-gold transition-colors"
+                          >
+                            <Instagram className="w-4 h-4" />
+                          </a>
+                        )}
+                        {property.agent.social.twitter && (
+                          <a
+                            href={property.agent.social.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-primary-gold transition-colors"
+                          >
+                            <Twitter className="w-4 h-4" />
+                          </a>
+                        )}
+                        {property.agent.social.facebook && (
+                          <a
+                            href={property.agent.social.facebook}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-primary-gold transition-colors"
+                          >
+                            <Facebook className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -461,7 +512,7 @@ const PropertyDetail = () => {
 
       {/* Recommended Section */}
       {similarListings.length > 0 && (
-        <section className="py-32 px-6 md:px-12 bg-background-surface">
+        <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
               <div>

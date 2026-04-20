@@ -7,9 +7,14 @@ import {
   Users,
   Briefcase,
   TrendingUp,
+  Instagram,
+  Twitter,
+  Facebook,
 } from "lucide-react";
+import { useProperties } from "../context/PropertyContext";
 
 const About = () => {
+  const { agents } = useProperties();
   const stats = [
     { label: "Properties Listed", value: "500+" },
     { label: "Happy Clients", value: "1,200+" },
@@ -39,9 +44,9 @@ const About = () => {
   ];
 
   return (
-    <div className="pt-32 pb-20 bg-background min-h-screen">
+    <div className="pt-24 md:pt-32 pb-20 bg-background min-h-screen">
       {/* Hero */}
-      <section className="px-6 md:px-12 mb-32">
+      <section className="px-6 md:px-12 py-20 md:py-0 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -51,17 +56,17 @@ const About = () => {
             <h4 className="label-caps text-primary-gold mb-6 tracking-[0.2em]">
               Our Story
             </h4>
-            <h1 className="text-5xl md:text-6xl font-playfair font-bold text-text-primary mb-8 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-text-primary mb-8 leading-tight">
               Redefining Luxury in{" "}
               <span className="text-primary-gold italic">Anambra State</span>
             </h1>
-            <p className="text-text-secondary text-lg font-inter leading-relaxed mb-8">
+            <p className="text-text-secondary text-base md:text-lg font-inter leading-relaxed mb-8">
               Founded in 2010, Raphmaths Estates was born out of a vision to
               bring world-class luxury real estate standards to Nigeria's
               Anambra State. We believe that a home is more than just a
               structure; it's a sanctuary, an investment, and a legacy.
             </p>
-            <p className="text-text-secondary text-lg font-inter leading-relaxed">
+            <p className="text-text-secondary text-base md:text-lg font-inter leading-relaxed">
               Our commitment to excellence, integrity, and bespoke service has
               made us the premier choice for high-net-worth individuals and
               corporate entities looking for the most exclusive properties in
@@ -80,12 +85,12 @@ const About = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-24 bg-background-surface border-y border-border px-6 md:px-12 mb-32">
+      <section className="py-16 md:py-24 bg-background-surface border-y border-border px-6 md:px-12 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center">
-                <h3 className="text-4xl md:text-5xl font-playfair font-bold text-primary-gold mb-2">
+                <h3 className="text-3xl md:text-5xl font-playfair font-bold text-primary-gold mb-2">
                   {stat.value}
                 </h3>
                 <p className="label-caps text-[10px] text-text-secondary tracking-widest">
@@ -98,9 +103,9 @@ const About = () => {
       </section>
 
       {/* Mission & Values */}
-      <section className="px-6 md:px-12 mb-32">
+      <section className="px-6 md:px-12 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {[
               {
                 icon: Target,
@@ -120,7 +125,7 @@ const About = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-background-surface p-10 border border-border rounded-sm hover:border-primary-gold transition-colors duration-500"
+                className="bg-background-surface p-8 md:p-10 border border-border rounded-sm hover:border-primary-gold transition-colors duration-500"
               >
                 <div className="w-12 h-12 bg-background flex items-center justify-center border border-border mb-8">
                   <item.icon className="w-6 h-6 text-primary-gold" />
@@ -143,11 +148,11 @@ const About = () => {
           <h4 className="label-caps text-primary-gold mb-6 tracking-[0.2em]">
             Our Experts
           </h4>
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary mb-20">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary mb-16 md:mb-20 leading-tight">
             The Faces of Raphmaths Estates
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {team.map((member, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+            {agents.map((member, idx) => (
               <div key={idx} className="group">
                 <div className="aspect-[4/5] overflow-hidden rounded-sm mb-6 relative">
                   <img
@@ -156,6 +161,40 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+
+                  {/* Social Links Hover Overlay */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {member.social.instagram && (
+                      <a
+                        href={member.social.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary-gold text-background rounded-full hover:bg-primary-lightGold transition-colors"
+                      >
+                        <Instagram className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.social.twitter && (
+                      <a
+                        href={member.social.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary-gold text-background rounded-full hover:bg-primary-lightGold transition-colors"
+                      >
+                        <Twitter className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.social.facebook && (
+                      <a
+                        href={member.social.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-primary-gold text-background rounded-full hover:bg-primary-lightGold transition-colors"
+                      >
+                        <Facebook className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <h4 className="text-xl font-playfair font-bold text-text-primary mb-1">
                   {member.name}

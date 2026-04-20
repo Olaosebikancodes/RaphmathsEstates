@@ -5,22 +5,69 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import propertiesData from "../data/properties.json";
-import blogData from "../data/blog.json";
+import { supabase } from "../lib/supabase";
 
 const PropertyContext = createContext();
 
 export const PropertyProvider = ({ children }) => {
-  const [properties, setProperties] = useState(propertiesData);
-  const [blogs] = useState(blogData);
+  const [properties, setProperties] = useState([]);
+  const [agents, setAgents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchInitialData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      // Fetch Agents
+      const { data: agentsData, error: agentsError } = await supabase
+        .from("agents")
+        .select("*");
+      if (agentsError) throw agentsError;
+      setAgents(agentsData);
+
+      // Fetch Properties
+      const { data: propertiesData, error: propertiesError } = await supabase
+        .from("properties")
+        .select("*")
+        .order("date_added", { ascending: false });
+      if (propertiesError) throw propertiesError;
+
+      // Map property field names (snake_case to camelCase where needed)
+      const mappedProperties = propertiesData.map((p) => ({
+        ...p,
+        dateAdded: p.date_added,
+        agent: p.agent_id,
+      }));
+
+      setProperties(mappedProperties);
+    } catch (err) {
+      console.error("Error fetching data from Supabase:", err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setProperties(propertiesData);
-  }, [propertiesData]);
+    fetchInitialData();
+  }, [fetchInitialData]);
 
   const getPropertyById = useCallback(
-    (id) => properties.find((p) => p.id === id),
-    [properties],
+    (id) => {
+      const property = properties.find((p) => p.id === id);
+      if (property && typeof property.agent === "string") {
+        return {
+          ...property,
+          agent: agents.find((a) => a.id === property.agent) || property.agent,
+        };
+      }
+      return property;
+    },
+    [properties, agents],
+  );
+
+  const getAgentById = useCallback(
+    (id) => agents.find((a) => a.id === id),
+    [agents],
   );
   const getFeaturedProperties = useCallback(
     () => properties.filter((p) => p.featured),
@@ -38,8 +85,11 @@ export const PropertyProvider = ({ children }) => {
     <PropertyContext.Provider
       value={{
         properties,
-        blogs,
+        agents,
+        loading,
+        fetchInitialData,
         getPropertyById,
+        getAgentById,
         getFeaturedProperties,
         getPropertiesByCity,
       }}

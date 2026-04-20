@@ -7,14 +7,16 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PageTransition from "./components/PageTransition";
 import ScrollToTop from "./components/ScrollToTop";
+import { Analytics } from "@vercel/analytics/react";
 
 import Home from "./pages/Home";
 import Listings from "./pages/Listings";
 import PropertyDetail from "./pages/PropertyDetail";
 import Saved from "./pages/Saved";
 import About from "./pages/About";
-import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
+import AdminAuth from "./pages/AdminAuth";
 
 function App() {
   const location = useLocation();
@@ -23,6 +25,7 @@ function App() {
     <PropertyProvider>
       <FavoritesProvider>
         <ScrollToTop />
+        <Analytics />
         <div className="min-h-screen bg-background flex flex-col">
           <Navbar />
           <main className="flex-grow">
@@ -69,18 +72,26 @@ function App() {
                   }
                 />
                 <Route
-                  path="/blog"
-                  element={
-                    <PageTransition>
-                      <Blog />
-                    </PageTransition>
-                  }
-                />
-                <Route
                   path="/contact"
                   element={
                     <PageTransition>
                       <Contact />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <PageTransition>
+                      <Admin />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="/admin/auth"
+                  element={
+                    <PageTransition>
+                      <AdminAuth />
                     </PageTransition>
                   }
                 />

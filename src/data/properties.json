@@ -21,12 +21,7 @@
     ],
     "description": "A stunning modern duplex with premium finishes and state-of-the-art facilities located in the heart of Awka's most prestigious neighborhood.",
     "amenities": ["Pool", "24/7 Security", "Generator", "CCTV", "Parking"],
-    "agent": {
-      "name": "Chidi Okafor",
-      "phone": "+234 801 234 5678",
-      "whatsapp": "+234 801 234 5678",
-      "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-    },
+    "agent": "agent_001",
     "featured": true,
     "dateAdded": "2026-03-15"
   },
@@ -51,12 +46,7 @@
     ],
     "description": "An exquisite terrace house offering modern living in a secure gated community in Onitsha, Anambra.",
     "amenities": ["24/7 Security", "Borehole", "Green Area", "Parking"],
-    "agent": {
-      "name": "Sarah Emetulu",
-      "phone": "+234 802 345 6789",
-      "whatsapp": "+234 802 345 6789",
-      "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
-    },
+    "agent": "agent_002",
     "featured": true,
     "dateAdded": "2026-03-20"
   },
@@ -87,12 +77,7 @@
       "24/7 Security",
       "Solar System"
     ],
-    "agent": {
-      "name": "Benson Udoh",
-      "phone": "+234 803 456 7890",
-      "whatsapp": "+234 803 456 7890",
-      "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
-    },
+    "agent": "agent_003",
     "featured": true,
     "dateAdded": "2026-04-01"
   },
@@ -112,17 +97,12 @@
     "bathrooms": 3,
     "size": 180,
     "images": [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop"
     ],
     "description": "Spacious and modern apartment in a prime location in Awka. Ideal for professionals.",
     "amenities": ["Security", "Parking", "Water Treatment"],
-    "agent": {
-      "name": "Chidi Okafor",
-      "phone": "+234 801 234 5678",
-      "whatsapp": "+234 801 234 5678",
-      "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-    },
+    "agent": "agent_001",
     "featured": true,
     "dateAdded": "2026-04-05"
   },
@@ -147,12 +127,7 @@
     ],
     "description": "Contemporary semi-detached duplex in the exclusive Ngozika Estate. Features automated gates and premium kitchen fittings.",
     "amenities": ["Smart Home", "24/7 Security", "Inverter System", "Parking"],
-    "agent": {
-      "name": "Chidi Okafor",
-      "phone": "+234 801 234 5678",
-      "whatsapp": "+234 801 234 5678",
-      "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-    },
+    "agent": "agent_001",
     "featured": true,
     "dateAdded": "2026-04-10"
   },
@@ -177,12 +152,7 @@
     ],
     "description": "Stunning penthouse overlooking the city. Features a private rooftop terrace and floor-to-ceiling windows.",
     "amenities": ["Elevator", "Rooftop Terrace", "Gym", "Concierge"],
-    "agent": {
-      "name": "Sarah Emetulu",
-      "phone": "+234 802 345 6789",
-      "whatsapp": "+234 802 345 6789",
-      "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
-    },
+    "agent": "agent_002",
     "featured": true,
     "dateAdded": "2026-04-12"
   },
@@ -207,12 +177,7 @@
     ],
     "description": "An architectural masterpiece in Nnewi's most elite neighborhood. Built with imported marble and premium wood finishes.",
     "amenities": ["Private Cinema", "Wine Cellar", "Pool", "Large Garden"],
-    "agent": {
-      "name": "Benson Udoh",
-      "phone": "+234 803 456 7890",
-      "whatsapp": "+234 803 456 7890",
-      "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
-    },
+    "agent": "agent_003",
     "featured": true,
     "dateAdded": "2026-04-14"
   },
@@ -237,12 +202,7 @@
     ],
     "description": "Modern suites perfect for corporate expatriates or small families. Secure and well-serviced.",
     "amenities": ["24/7 Power", "Security", "Water Treatment", "Laundry"],
-    "agent": {
-      "name": "Benson Udoh",
-      "phone": "+234 803 456 7890",
-      "whatsapp": "+234 803 456 7890",
-      "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
-    },
+    "agent": "agent_003",
     "featured": true,
     "dateAdded": "2026-04-15"
   },
@@ -267,12 +227,7 @@
     ],
     "description": "A spacious and secure detached duplex in a developing high-end area of Onitsha. High appreciation potential.",
     "amenities": ["CCTV", "Electric Fence", "Generator House", "Boys Quarters"],
-    "agent": {
-      "name": "Sarah Emetulu",
-      "phone": "+234 802 345 6789",
-      "whatsapp": "+234 802 345 6789",
-      "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
-    },
+    "agent": "agent_002",
     "featured": true,
     "dateAdded": "2026-04-16"
   },
@@ -297,12 +252,7 @@
     ],
     "description": "An sprawling estate villa with modern Zen-inspired architecture. Features a private mini-golf course and a swimming pool.",
     "amenities": ["Mini Golf", "Infinity Pool", "Smart Lighting", "Security Post"],
-    "agent": {
-      "name": "Chidi Okafor",
-      "phone": "+234 801 234 5678",
-      "whatsapp": "+234 801 234 5678",
-      "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-    },
+    "agent": "agent_001",
     "featured": true,
     "dateAdded": "2026-04-17"
   }

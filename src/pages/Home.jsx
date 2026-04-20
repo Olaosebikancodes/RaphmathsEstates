@@ -90,16 +90,16 @@ const Home = () => {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-background-surface">
+      <section className="relative min-h-[600px] md:h-screen md:min-h-[700px] flex items-center justify-center overflow-hidden bg-background-surface">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat">
           <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 md:py-0 text-center">
           <motion.h4
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="label-caps text-primary-gold mb-6 tracking-[0.3em] font-bold"
+            className="label-caps text-primary-gold mb-6 tracking-[0.3em] font-bold text-xs md:text-sm"
           >
             Premier Real Estate
           </motion.h4>
@@ -107,7 +107,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-text-primary mb-12 leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-text-primary mb-12 leading-tight"
           >
             Where Luxury <br /> Finds Home
           </motion.h1>
@@ -178,7 +178,7 @@ const Home = () => {
       </section>
 
       {/* Featured Listings */}
-      <section className="py-32 px-6 md:px-12 bg-background">
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="max-w-2xl">
@@ -207,7 +207,7 @@ const Home = () => {
       </section>
 
       {/* Why Raphmaths Estates */}
-      <section className="py-32 px-6 md:px-12 bg-background-surface relative overflow-hidden">
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface relative overflow-hidden">
         {/* Background Accent */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-gold/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -264,7 +264,7 @@ const Home = () => {
       </section>
 
       {/* Locations */}
-      <section className="py-32 px-6 md:px-12 bg-background">
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
@@ -306,7 +306,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 px-6 md:px-12 bg-background-surface">
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
