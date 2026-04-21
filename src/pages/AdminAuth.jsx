@@ -61,20 +61,13 @@ const AdminAuth = () => {
         showToast(`Code Sent! Please contact the main admin.`, "success");
       } else {
         // Fallback if EmailJS is not configured
-        console.log(`Code: ${newCode} (EmailJS not configured)`);
         showToast(
           `Code Generated: ${newCode}. Please contact main admin.`,
           "success",
         );
       }
     } catch (err) {
-      console.error("Full Error Object:", err);
-      const errorMsg =
-        err.message ||
-        err.error_description ||
-        JSON.stringify(err) ||
-        "Unknown error occurred";
-      showToast(`Failed to generate or send code: ${errorMsg}`, "error");
+      showToast(err.message || "Failed to generate or send code", "error");
     } finally {
       setRequestingCode(false);
     }

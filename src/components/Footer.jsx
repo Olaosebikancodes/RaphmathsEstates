@@ -13,7 +13,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background-surface border-t border-border pt-20 pb-10 px-6 md:px-12">
+    <footer className="bg-background-surface border-t border-border pt-20 pb-10 px-6 md:px-12 w-full">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         {/* Brand Info */}
         <div className="flex flex-col gap-6">
@@ -147,6 +147,22 @@ const Footer = () => {
                 Ozubulu Estates
               </Link>
             </li>
+            <li>
+              <Link
+                to="/listings?city=Obosi"
+                className="hover:text-primary-gold transition-colors"
+              >
+                Obosi Listings
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/listings?city=Ogidi"
+                className="hover:text-primary-gold transition-colors"
+              >
+                Ogidi Premium
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -178,7 +194,7 @@ const Footer = () => {
         <div className="flex flex-col gap-1">
           <p>© {currentYear} Raphmaths Estates. All rights reserved.</p>
           <p className="text-[10px] opacity-70 italic">
-            Developed by Prai Saac Code Firm
+            Developed by Prisactechlabs
           </p>
         </div>
         <div className="flex items-center gap-8">

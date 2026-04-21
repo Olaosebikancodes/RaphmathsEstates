@@ -28,6 +28,7 @@ CREATE TABLE properties (
   amenities TEXT[],
   agent_id TEXT REFERENCES agents(id) ON DELETE SET NULL,
   featured BOOLEAN DEFAULT FALSE,
+  video_url TEXT,
   date_added DATE DEFAULT CURRENT_DATE,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

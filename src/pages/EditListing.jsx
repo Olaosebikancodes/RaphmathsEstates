@@ -98,6 +98,27 @@ const EditListing = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Stricter Validation
+    if (Number(formData.price) <= 0) {
+      return showToast("Price must be a positive number", "error");
+    }
+    if (Number(formData.bedrooms) <= 0) {
+      return showToast("Number of bedrooms must be at least 1", "error");
+    }
+    if (Number(formData.bathrooms) <= 0) {
+      return showToast("Number of bathrooms must be at least 1", "error");
+    }
+    if (Number(formData.size) <= 0) {
+      return showToast("Property size must be a positive number", "error");
+    }
+    if (formData.images.length === 0) {
+      return showToast("At least one property image is required", "error");
+    }
+    if (!formData.agent_id) {
+      return showToast("Please assign an agent to this property", "error");
+    }
+
     setLoading(true);
     try {
       const { agent, dateAdded, ...propertyToUpdate } = formData;
@@ -449,6 +470,23 @@ const EditListing = () => {
                   rows={4}
                   className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm resize-none"
                 />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] label-caps text-text-secondary font-bold">
+                  Video URL (Optional)
+                </label>
+                <input
+                  type="url"
+                  name="video_url"
+                  value={formData.video_url || ""}
+                  onChange={handleChange}
+                  placeholder="e.g., https://www.youtube.com/watch?v=..."
+                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                />
+                <p className="text-[10px] text-text-secondary opacity-60">
+                  YouTube, Vimeo or direct video link
+                </p>
               </div>
 
               <div className="flex items-center gap-3">

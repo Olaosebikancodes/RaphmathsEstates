@@ -25,6 +25,17 @@ const Listings = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sortBy, setSortBy] = useState("newest");
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
+
   const currentPage = parseInt(searchParams.get("page") || "1");
 
   // Filter States
@@ -42,8 +53,8 @@ const Listings = () => {
   useEffect(() => {
     setFilters((prev) => ({
       ...prev,
-      city: searchParams.get("city") || "all",
-      status: searchParams.get("status") || "all",
+      city: (searchParams.get("city") || "all").toLowerCase(),
+      status: (searchParams.get("status") || "all").toLowerCase(),
       query: searchParams.get("query") || "",
     }));
   }, [searchParams]);
@@ -52,25 +63,28 @@ const Listings = () => {
     let result = properties.filter((prop) => {
       const cityMatch =
         filters.city === "all" ||
-        prop.location.city.toLowerCase() === filters.city.toLowerCase();
+        (prop.location?.city?.toLowerCase() || "") ===
+          filters.city.toLowerCase();
       const typeMatch =
         filters.type === "all" ||
-        prop.type.toLowerCase() === filters.type.toLowerCase();
+        (prop.type?.toLowerCase() || "") === filters.type.toLowerCase();
       const statusMatch =
-        filters.status === "all" || prop.status === filters.status;
+        filters.status === "all" ||
+        (prop.status || "").toLowerCase() === filters.status.toLowerCase();
       const priceMatch =
-        prop.price >= filters.minPrice && prop.price <= filters.maxPrice;
+        (prop.price || 0) >= filters.minPrice &&
+        (prop.price || 0) <= filters.maxPrice;
       const bedMatch =
         filters.bedrooms === "all" ||
-        prop.bedrooms >= parseInt(filters.bedrooms);
+        (prop.bedrooms || 0) >= parseInt(filters.bedrooms);
 
       const queryLower = filters.query.toLowerCase();
       const queryMatch =
         !filters.query ||
-        prop.title.toLowerCase().includes(queryLower) ||
-        prop.location.city.toLowerCase().includes(queryLower) ||
-        prop.location.area.toLowerCase().includes(queryLower) ||
-        prop.id.toLowerCase().includes(queryLower);
+        (prop.title?.toLowerCase() || "").includes(queryLower) ||
+        (prop.location?.city?.toLowerCase() || "").includes(queryLower) ||
+        (prop.location?.area?.toLowerCase() || "").includes(queryLower) ||
+        (prop.id?.toLowerCase() || "").includes(queryLower);
 
       return (
         cityMatch &&
@@ -136,7 +150,7 @@ const Listings = () => {
   };
 
   return (
-    <div className="pt-24 md:pt-32 pb-20 px-6 md:px-12 bg-background">
+    <div className="pt-24 md:pt-32 pb-20 px-6 md:px-12 bg-background w-full">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         {(filters.query || filters.city !== "all") && (
@@ -245,33 +259,40 @@ const Listings = () => {
                     "Nkpor",
                     "Ogidi",
                     "Umunze",
+                    "Otuocha",
+                    "Aguleri",
+                    "Ichi",
+                    "Oraifite",
+                    "Ukpor",
+                    "Umuoji",
+                    "Okpoko",
+                    "Atani",
                   ].map((city) => (
-                      <label
-                        key={city}
-                        className="flex items-center gap-3 cursor-pointer group"
+                    <label
+                      key={city}
+                      className="flex items-center gap-3 cursor-pointer group"
+                    >
+                      <input
+                        type="radio"
+                        name="city"
+                        checked={filters.city === city.toLowerCase()}
+                        onChange={() =>
+                          handleFilterChange("city", city.toLowerCase())
+                        }
+                        className="w-4 h-4 border-border bg-transparent text-primary-gold focus:ring-primary-gold"
+                      />
+                      <span
+                        className={cn(
+                          "text-sm font-inter transition-colors",
+                          filters.city === city.toLowerCase()
+                            ? "text-text-primary font-bold"
+                            : "text-text-secondary group-hover:text-text-primary",
+                        )}
                       >
-                        <input
-                          type="radio"
-                          name="city"
-                          checked={filters.city === city.toLowerCase()}
-                          onChange={() =>
-                            handleFilterChange("city", city.toLowerCase())
-                          }
-                          className="w-4 h-4 border-border bg-transparent text-primary-gold focus:ring-primary-gold"
-                        />
-                        <span
-                          className={cn(
-                            "text-sm font-inter transition-colors",
-                            filters.city === city.toLowerCase()
-                              ? "text-text-primary font-bold"
-                              : "text-text-secondary group-hover:text-text-primary",
-                          )}
-                        >
-                          {city}
-                        </span>
-                      </label>
-                    ),
-                  )}
+                        {city}
+                      </span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
@@ -444,7 +465,7 @@ const Listings = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-background-surface z-[70] shadow-2xl p-8 overflow-y-auto md:hidden"
+              className="fixed top-0 right-0 h-full w-[90%] max-w-sm bg-[#0A0A0A] z-[1100] shadow-2xl p-8 overflow-y-auto md:hidden border-l border-border"
             >
               <div className="flex items-center justify-between mb-12">
                 <h3 className="text-2xl font-playfair font-bold text-text-primary">
@@ -503,6 +524,14 @@ const Listings = () => {
                       "Nkpor",
                       "Ogidi",
                       "Umunze",
+                      "Otuocha",
+                      "Aguleri",
+                      "Ichi",
+                      "Oraifite",
+                      "Ukpor",
+                      "Umuoji",
+                      "Okpoko",
+                      "Atani",
                     ].map((city) => (
                       <button
                         key={city}
@@ -550,7 +579,9 @@ const Listings = () => {
                 {/* Price Range */}
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <h4 className="label-caps text-primary-gold">Price Range</h4>
+                    <h4 className="label-caps text-primary-gold">
+                      Price Range
+                    </h4>
                     <span className="text-[10px] text-text-secondary">
                       Max: 200M
                     </span>

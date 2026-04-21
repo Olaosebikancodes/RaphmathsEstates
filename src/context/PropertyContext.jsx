@@ -43,7 +43,6 @@ export const PropertyProvider = ({ children }) => {
 
       setProperties(mappedProperties);
     } catch (err) {
-      console.error("Error fetching data from Supabase:", err.message);
       showToast("Failed to load property data. Please refresh.", "error");
     } finally {
       setLoading(false);
@@ -75,7 +74,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error adding property:", err.message);
         throw err;
       }
     },
@@ -92,7 +90,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error updating property:", err.message);
         throw err;
       }
     },
@@ -109,7 +106,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error deleting property:", err.message);
         throw err;
       }
     },
@@ -123,7 +119,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error adding agent:", err.message);
         throw err;
       }
     },
@@ -140,7 +135,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error updating agent:", err.message);
         throw err;
       }
     },
@@ -154,7 +148,6 @@ export const PropertyProvider = ({ children }) => {
         if (error) throw error;
         await fetchInitialData();
       } catch (err) {
-        console.error("Error deleting agent:", err.message);
         throw err;
       }
     },
@@ -174,7 +167,7 @@ export const PropertyProvider = ({ children }) => {
   const getPropertiesByCity = useCallback(
     (city) =>
       properties.filter(
-        (p) => p.location.city.toLowerCase() === city.toLowerCase(),
+        (p) => (p.location?.city?.toLowerCase() || "") === city.toLowerCase(),
       ),
     [properties],
   );

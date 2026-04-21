@@ -1,34 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Search } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '../utils/cn';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Heart, Search } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "../utils/cn";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [shouldTransition, setShouldTransition] = useState(true);
   const location = useLocation();
+
+  useEffect(() => {
+    // Disable transitions during menu state change to prevent flickering
+    setShouldTransition(false);
+    const timer = setTimeout(() => setShouldTransition(true), 400);
+    return () => clearTimeout(timer);
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Listings', path: '/listings' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: "Home", path: "/" },
+    { name: "Listings", path: "/listings" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 md:px-12',
-        isScrolled ? 'bg-background/90 backdrop-blur-md border-b border-border py-3' : 'bg-transparent'
+        "fixed top-0 left-0 right-0 z-[1000] px-6 py-4 md:px-12",
+        isMobileMenuOpen || isScrolled
+          ? "bg-[#0A0A0A] border-b border-border py-3"
+          : "bg-transparent",
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -50,8 +71,10 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-inter font-medium tracking-wide transition-colors duration-300 hover:text-primary-gold',
-                location.pathname === link.path ? 'text-primary-gold' : 'text-text-primary'
+                "text-sm font-inter font-medium tracking-wide transition-colors duration-300 hover:text-primary-gold",
+                location.pathname === link.path
+                  ? "text-primary-gold"
+                  : "text-text-primary",
               )}
             >
               {link.name}
@@ -61,7 +84,10 @@ const Navbar = () => {
             <Link to="/saved" className="relative group">
               <Heart className="w-5 h-5 text-text-primary group-hover:text-primary-gold transition-colors" />
             </Link>
-            <Link to="/listings" className="p-2 bg-primary-gold text-background rounded-sm hover:bg-primary-lightGold transition-colors">
+            <Link
+              to="/listings"
+              className="p-2 bg-primary-gold text-background rounded-sm hover:bg-primary-lightGold transition-colors"
+            >
               <Search className="w-4 h-4" />
             </Link>
           </div>
@@ -85,14 +111,14 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-md z-[60] md:hidden"
+              className="fixed inset-0 bg-black z-[1100] md:hidden" // 100% opaque black
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-background-surface z-[70] shadow-2xl p-8 md:hidden"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0A0A0A] z-[1200] shadow-2xl p-8 md:hidden border-l border-border"
             >
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between mb-12">

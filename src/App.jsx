@@ -33,9 +33,8 @@ function App() {
           <ScrollToTop />
           <ToastContainer />
           <Analytics />
-          <div className="min-h-screen bg-background flex flex-col">
-            <Navbar />
-            <main className="flex-grow">
+          <div className="min-h-screen w-full bg-background flex flex-col overflow-x-hidden relative">
+            <main className="flex-grow w-full">
               <AnimatePresence mode="wait">
                 <Routes location={location} key={location.pathname}>
                   <Route
@@ -129,6 +128,7 @@ function App() {
                 </Routes>
               </AnimatePresence>
             </main>
+            <Navbar />
             <Footer />
           </div>
         </FavoritesProvider>

@@ -80,8 +80,7 @@ const PropertyDetail = () => {
         showToast("Link copied to clipboard!", "success");
       }
     } catch (err) {
-      console.error("Error sharing:", err);
-      showToast("Failed to share property", "error");
+      // Error is silent as fallback is provided
     }
   };
 

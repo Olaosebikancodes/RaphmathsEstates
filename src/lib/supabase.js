@@ -26,8 +26,10 @@ export const trackPropertyClick = async (propertyId) => {
         user_agent: navigator.userAgent,
       },
     ]);
-    if (error) throw error;
+    if (error) {
+      // Background click tracking failure - silent for UX
+    }
   } catch (err) {
-    console.error("Error tracking click:", err.message);
+    // Silent for UX
   }
 };

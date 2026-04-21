@@ -62,6 +62,12 @@ const AddAgent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Stricter Validation
+    if (!formData.photo) {
+      return showToast("An agent photo is required", "error");
+    }
+
     setLoading(true);
     try {
       const agentData = {
@@ -73,10 +79,7 @@ const AddAgent = () => {
       navigate("/admin");
     } catch (err) {
       const errorMsg = err.message || "Unknown error occurred";
-      showToast(
-        "Error adding agent: " + errorMsg,
-        "error"
-      );
+      showToast("Error adding agent: " + errorMsg, "error");
     } finally {
       setLoading(false);
     }

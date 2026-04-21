@@ -33,7 +33,7 @@ const Home = () => {
 
   const getCityCount = (city) => {
     return properties.filter(
-      (p) => p.location.city.toLowerCase() === city.toLowerCase(),
+      (p) => (p.location?.city?.toLowerCase() || "") === city.toLowerCase(),
     ).length;
   };
 
@@ -100,12 +100,12 @@ const Home = () => {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[600px] md:h-screen md:min-h-[700px] flex items-center justify-center overflow-hidden bg-background-surface">
+      <section className="relative min-h-screen md:h-screen flex items-center justify-center overflow-hidden bg-background-surface">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat">
           <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 md:py-0 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20 md:py-0 text-center">
           <motion.h4
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -161,6 +161,48 @@ const Home = () => {
                   </option>
                   <option value="ekwulobia" className="bg-background-surface">
                     Ekwulobia
+                  </option>
+                  <option value="ihiala" className="bg-background-surface">
+                    Ihiala
+                  </option>
+                  <option value="ozubulu" className="bg-background-surface">
+                    Ozubulu
+                  </option>
+                  <option value="obosi" className="bg-background-surface">
+                    Obosi
+                  </option>
+                  <option value="nkpor" className="bg-background-surface">
+                    Nkpor
+                  </option>
+                  <option value="ogidi" className="bg-background-surface">
+                    Ogidi
+                  </option>
+                  <option value="umunze" className="bg-background-surface">
+                    Umunze
+                  </option>
+                  <option value="otuocha" className="bg-background-surface">
+                    Otuocha
+                  </option>
+                  <option value="aguleri" className="bg-background-surface">
+                    Aguleri
+                  </option>
+                  <option value="ichi" className="bg-background-surface">
+                    Ichi
+                  </option>
+                  <option value="oraifite" className="bg-background-surface">
+                    Oraifite
+                  </option>
+                  <option value="ukpor" className="bg-background-surface">
+                    Ukpor
+                  </option>
+                  <option value="umuoji" className="bg-background-surface">
+                    Umuoji
+                  </option>
+                  <option value="okpoko" className="bg-background-surface">
+                    Okpoko
+                  </option>
+                  <option value="atani" className="bg-background-surface">
+                    Atani
                   </option>
                 </select>
               </div>
