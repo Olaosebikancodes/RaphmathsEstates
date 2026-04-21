@@ -77,19 +77,34 @@ CREATE TABLE admin_invites (
 -- Enable RLS for Admin Invites
 ALTER TABLE admin_invites ENABLE ROW LEVEL SECURITY;
 
--- Allow anyone to insert a new code (to request registration)
--- In a production app, you might want to rate limit this or restrict it.
+-- Allow public to request a code (insert only)
 CREATE POLICY "Allow public insert to admin_invites" 
 ON admin_invites FOR INSERT 
 WITH CHECK (true);
 
--- Allow public to read their own code for verification during signup
-CREATE POLICY "Allow public select from admin_invites" 
-ON admin_invites FOR SELECT 
-USING (true);
+-- Allow authenticated admins to manage all codes
+CREATE POLICY "Admin manage all invites" 
+ON admin_invites FOR ALL 
+USING (auth.role() = 'authenticated') 
+WITH CHECK (auth.role() = 'authenticated');
 
--- Allow updates (marking as used)
-CREATE POLICY "Allow public update to admin_invites" 
-ON admin_invites FOR UPDATE 
-USING (true) 
-WITH CHECK (true);
+-- 1. First, we revoke public select and update to prevent browsing the table
+-- (This is handled by not creating public SELECT/UPDATE policies)
+
+-- 2. Create a secure function to verify and use a code
+-- This function runs with "SECURITY DEFINER" to bypass RLS,
+-- but it only returns a result if the exact code is known.
+CREATE OR REPLACE FUNCTION verify_and_use_admin_code(input_code TEXT)
+RETURNS TABLE (id UUID) 
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  RETURN QUERY
+  UPDATE admin_invites
+  SET is_used = TRUE
+  WHERE code = input_code 
+    AND is_used = FALSE
+  RETURNING admin_invites.id;
+END;
+$$;

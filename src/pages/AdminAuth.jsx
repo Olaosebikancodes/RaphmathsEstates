@@ -102,15 +102,13 @@ const AdminAuth = () => {
         if (error) throw error;
         navigate("/admin");
       } else {
-        // Verify Invitation Code
-        const { data: invite, error: inviteError } = await supabase
-          .from("admin_invites")
-          .select("*")
-          .eq("code", inviteCode)
-          .eq("is_used", false)
-          .single();
+        // Verify and use invitation code atomically via secure RPC
+        const { data: invites, error: inviteError } = await supabase.rpc(
+          "verify_and_use_admin_code",
+          { input_code: inviteCode },
+        );
 
-        if (inviteError || !invite) {
+        if (inviteError || !invites || invites.length === 0) {
           throw new Error(
             "Invalid or expired One-Time Code. Please contact the main admin.",
           );
@@ -124,12 +122,6 @@ const AdminAuth = () => {
 
         const { error: signUpError } = await signUp(email, password);
         if (signUpError) throw signUpError;
-
-        // Mark code as used
-        await supabase
-          .from("admin_invites")
-          .update({ is_used: true })
-          .eq("id", invite.id);
 
         showToast(
           "Account created successfully! You can now login.",
