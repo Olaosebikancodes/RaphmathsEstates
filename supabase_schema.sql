@@ -1,5 +1,5 @@
 -- Create Agents Table
-CREATE TABLE agents (
+CREATE TABLE IF NOT EXISTS agents (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   role TEXT,
@@ -13,7 +13,7 @@ CREATE TABLE agents (
 );
 
 -- Create Properties Table
-CREATE TABLE properties (
+CREATE TABLE IF NOT EXISTS properties (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   type TEXT,
@@ -34,7 +34,7 @@ CREATE TABLE properties (
 );
 
 -- Create Clicks Table (for per-listing click tracking)
-CREATE TABLE property_clicks (
+CREATE TABLE IF NOT EXISTS property_clicks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   property_id TEXT REFERENCES properties(id) ON DELETE CASCADE,
   clicked_at TIMESTAMPTZ DEFAULT NOW(),
@@ -48,26 +48,37 @@ ALTER TABLE properties ENABLE ROW LEVEL SECURITY;
 ALTER TABLE property_clicks ENABLE ROW LEVEL SECURITY;
 
 -- Create Policies (Public Read Access)
+-- Drop existing policies first to avoid "already exists" errors
+DROP POLICY IF EXISTS "Public Read Agents" ON agents;
 CREATE POLICY "Public Read Agents" ON agents FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public Read Properties" ON properties;
 CREATE POLICY "Public Read Properties" ON properties FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public Insert Clicks" ON property_clicks;
 CREATE POLICY "Public Insert Clicks" ON property_clicks FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public Read Clicks" ON property_clicks;
 CREATE POLICY "Public Read Clicks" ON property_clicks FOR SELECT USING (true);
 
 -- Admin Policies (Full access for authenticated users)
+DROP POLICY IF EXISTS "Admin All Agents" ON agents;
 CREATE POLICY "Admin All Agents" ON agents FOR ALL 
   USING (auth.role() = 'authenticated') 
   WITH CHECK (auth.role() = 'authenticated');
 
+DROP POLICY IF EXISTS "Admin All Properties" ON properties;
 CREATE POLICY "Admin All Properties" ON properties FOR ALL 
   USING (auth.role() = 'authenticated') 
   WITH CHECK (auth.role() = 'authenticated');
 
+DROP POLICY IF EXISTS "Admin All Clicks" ON property_clicks;
 CREATE POLICY "Admin All Clicks" ON property_clicks FOR ALL 
   USING (auth.role() = 'authenticated') 
   WITH CHECK (auth.role() = 'authenticated');
 
 -- Create Admin Invites Table (for registration codes)
-CREATE TABLE admin_invites (
+CREATE TABLE IF NOT EXISTS admin_invites (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   code TEXT NOT NULL UNIQUE,
   is_used BOOLEAN DEFAULT FALSE,
@@ -78,11 +89,13 @@ CREATE TABLE admin_invites (
 ALTER TABLE admin_invites ENABLE ROW LEVEL SECURITY;
 
 -- Allow public to request a code (insert only)
+DROP POLICY IF EXISTS "Allow public insert to admin_invites" ON admin_invites;
 CREATE POLICY "Allow public insert to admin_invites" 
 ON admin_invites FOR INSERT 
 WITH CHECK (true);
 
 -- Allow authenticated admins to manage all codes
+DROP POLICY IF EXISTS "Admin manage all invites" ON admin_invites;
 CREATE POLICY "Admin manage all invites" 
 ON admin_invites FOR ALL 
 USING (auth.role() = 'authenticated') 
