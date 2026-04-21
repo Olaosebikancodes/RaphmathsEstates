@@ -43,7 +43,7 @@ const AdminAuth = () => {
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
       const adminEmail =
-        import.meta.env.VITE_ADMIN_EMAIL || "olaosebikani345@gmail.com";
+        import.meta.env.VITE_ADMIN_EMAIL || "princessojiribe@gmail.com";
 
       if (serviceId && templateId && publicKey) {
         await emailjs.send(
@@ -60,14 +60,17 @@ const AdminAuth = () => {
 
         showToast(`Code Sent! Please contact the main admin.`, "success");
       } else {
-        // Fallback if EmailJS is not configured
-        showToast(
-          `Code Generated: ${newCode}. Please contact main admin.`,
-          "success",
+        // Log configuration error but don't show code
+        throw new Error(
+          "Email service is not configured. Please contact the main admin.",
         );
       }
     } catch (err) {
-      showToast(err.message || "Failed to generate or send code", "error");
+      showToast(
+        err.message ||
+          "Failed to generate or send code. Please try again later.",
+        "error",
+      );
     } finally {
       setRequestingCode(false);
     }
@@ -250,7 +253,7 @@ const AdminAuth = () => {
                 />
               </div>
               <p className="text-[9px] text-text-secondary opacity-60">
-                Contact olaosebikani345@gmail.com for your access code.
+                Contact princessojiribe@gmail.com for your access code.
               </p>
             </div>
           )}
