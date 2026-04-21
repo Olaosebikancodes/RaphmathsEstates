@@ -46,7 +46,7 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-[1000] px-6 py-4 md:px-12",
+        "fixed top-0 left-0 right-0 z-[2000] px-6 py-4 md:px-12",
         isMobileMenuOpen || isScrolled
           ? "bg-[#0A0A0A] border-b border-border py-3"
           : "bg-transparent",

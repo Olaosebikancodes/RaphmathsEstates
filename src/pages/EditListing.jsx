@@ -340,7 +340,7 @@ const EditListing = () => {
               <label className="text-[10px] label-caps text-text-secondary font-bold">
                 Amenities
               </label>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   value={newAmenity}
@@ -351,7 +351,7 @@ const EditListing = () => {
                 <button
                   type="button"
                   onClick={addAmenity}
-                  className="bg-primary-gold text-background px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-all rounded-sm"
+                  className="w-full sm:w-auto bg-primary-gold text-background px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-all rounded-sm"
                 >
                   Add
                 </button>
