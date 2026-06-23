@@ -24,6 +24,7 @@ export default {
         },
         status: {
           success: '#4CAF7D',
+          error: '#EF4444',
         }
       },
       fontFamily: {

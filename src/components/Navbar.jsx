@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Heart, Search } from "lucide-react";
+import { Menu, X, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils/cn";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [shouldTransition, setShouldTransition] = useState(true);
   const location = useLocation();
-
-  useEffect(() => {
-    // Disable transitions during menu state change to prevent flickering
-    setShouldTransition(false);
-    const timer = setTimeout(() => setShouldTransition(true), 400);
-    return () => clearTimeout(timer);
-  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -29,12 +21,14 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -46,25 +40,25 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-[2000] px-6 py-4 md:px-12",
+        "fixed top-0 left-0 right-0 z-[2000] transition-all duration-300",
         isMobileMenuOpen || isScrolled
-          ? "bg-[#0A0A0A] border-b border-border py-3"
-          : "bg-transparent",
+          ? "bg-[#0A0A0A] border-b border-border py-4 px-6 md:px-12"
+          : "bg-transparent py-6 px-6 md:px-12"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-start group">
+        <Link to="/" className="flex flex-col items-start group" aria-label="Raphmaths Estates home">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl md:text-3xl font-playfair font-bold text-primary-gold tracking-tight">
+            <span className="text-xl md:text-2xl font-playfair font-bold text-primary-gold tracking-tight">
               Raphmaths Estates
-            </h1>
-            <div className="w-4 h-4 bg-primary-gold transform rotate-45" />
+            </span>
+            <div className="w-3 h-3 bg-primary-gold transform rotate-45 flex-shrink-0" />
           </div>
-          <div className="w-full h-[1px] bg-primary-gold mt-1 origin-left transition-transform duration-300 group-hover:scale-x-110" />
+          <div className="w-full h-px bg-primary-gold mt-0.5 origin-left transition-transform duration-300 group-hover:scale-x-110" />
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -74,35 +68,40 @@ const Navbar = () => {
                 "text-sm font-inter font-medium tracking-wide transition-colors duration-300 hover:text-primary-gold",
                 location.pathname === link.path
                   ? "text-primary-gold"
-                  : "text-text-primary",
+                  : "text-text-primary"
               )}
             >
               {link.name}
             </Link>
           ))}
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border">
-            <Link to="/saved" className="relative group">
+            <Link
+              to="/saved"
+              className="group"
+              aria-label="Saved properties"
+            >
               <Heart className="w-5 h-5 text-text-primary group-hover:text-primary-gold transition-colors" />
             </Link>
             <Link
               to="/listings"
-              className="p-2 bg-primary-gold text-background rounded-sm hover:bg-primary-lightGold transition-colors"
+              className="px-5 py-2 bg-primary-gold text-background font-inter font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors active:scale-[0.98]"
             >
-              <Search className="w-4 h-4" />
+              Browse
             </Link>
           </div>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden text-text-primary"
+          className="md:hidden text-text-primary p-1"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -110,71 +109,63 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black z-[1100] md:hidden" // 100% opaque black
+              className="fixed inset-0 bg-black/80 z-[1100] md:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0A0A0A] z-[1200] shadow-2xl p-8 md:hidden border-l border-border"
+              transition={{ type: "spring", damping: 28, stiffness: 240 }}
+              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-[#0A0A0A] z-[1200] shadow-2xl p-8 md:hidden border-l border-border"
             >
               <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between mb-12">
-                  <h2 className="text-xl font-playfair font-bold text-primary-gold">
-                    Navigation
-                  </h2>
+                <div className="flex items-center justify-between mb-14">
+                  <span className="font-playfair font-bold text-primary-gold text-lg">
+                    Menu
+                  </span>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-text-secondary hover:text-text-primary"
+                    className="p-2 text-text-secondary hover:text-text-primary transition-colors"
+                    aria-label="Close menu"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-7">
                   {navLinks.map((link) => (
                     <Link
                       key={link.path}
                       to={link.path}
                       className={cn(
-                        "text-xl font-inter font-medium tracking-wide transition-colors",
+                        "text-2xl font-playfair font-bold transition-colors",
                         location.pathname === link.path
                           ? "text-primary-gold"
-                          : "text-text-primary",
+                          : "text-text-primary hover:text-primary-gold"
                       )}
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.name}
                     </Link>
                   ))}
                 </div>
 
-                <div className="mt-auto pt-8 border-t border-border flex flex-col gap-6">
+                <div className="mt-auto pt-8 border-t border-border flex flex-col gap-4">
                   <Link
                     to="/saved"
-                    className="flex items-center gap-4 text-text-primary group"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 text-text-secondary hover:text-primary-gold transition-colors"
                   >
-                    <div className="w-10 h-10 bg-background flex items-center justify-center rounded-sm">
-                      <Heart className="w-5 h-5 text-primary-gold" />
-                    </div>
-                    <span className="font-bold text-xs uppercase tracking-widest">
+                    <Heart className="w-4 h-4 text-primary-gold" />
+                    <span className="font-inter font-bold text-xs uppercase tracking-widest">
                       Saved Properties
                     </span>
                   </Link>
                   <Link
                     to="/listings"
-                    className="flex items-center gap-4 text-background group"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 bg-primary-gold text-background py-4 font-inter font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors"
                   >
-                    <div className="flex-1 bg-primary-gold flex items-center justify-center gap-3 py-4 rounded-sm shadow-lg shadow-primary-gold/20">
-                      <Search className="w-4 h-4" />
-                      <span className="font-bold text-xs uppercase tracking-widest">
-                        Browse Listings
-                      </span>
-                    </div>
+                    Browse Listings
                   </Link>
                 </div>
               </div>

@@ -143,34 +143,41 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-text-primary pt-20 md:pt-32 pb-20">
-      <div className="max-w-4xl mx-auto px-6">
+    <div className="min-h-screen bg-background text-text-primary">
+      {/* Admin top bar */}
+      <div className="sticky top-0 z-50 bg-background border-b border-border px-6 h-14 flex items-center justify-between">
         <button
           onClick={() => navigate("/admin")}
-          className="flex items-center gap-2 text-text-secondary hover:text-primary-gold transition-colors mb-8 group"
+          className="flex items-center gap-2 text-text-secondary hover:text-primary-gold transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-xs uppercase tracking-widest font-bold">
-            Back to Dashboard
-          </span>
+          <span className="text-xs uppercase tracking-widest font-bold">Dashboard</span>
         </button>
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm font-playfair font-bold text-primary-gold">Raphmaths Estates</span>
+          <div className="w-2 h-2 bg-primary-gold rotate-45" />
+        </div>
+      </div>
 
-        <div className="mb-12">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <div className="mb-10">
           <h1 className="text-4xl font-playfair font-bold mb-2">
             Add New Listing
           </h1>
-          <p className="text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Fill in the details below to create a new luxury property listing.
           </p>
+          <div className="w-8 h-px bg-primary-gold mt-6" />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Basic Information */}
-          <div className="bg-background-surface border border-border p-8 rounded-sm shadow-sm">
-            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-primary-gold" />
-              Basic Information
-            </h2>
+        <form onSubmit={handleSubmit}>
+          {/* Section 01 — Basic Information */}
+          <div className="py-10 border-b border-border">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-cormorant text-xs font-bold text-primary-gold tracking-[0.25em]">01</span>
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-primary font-inter">Basic Information</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-[10px] label-caps text-text-secondary font-bold">
@@ -183,7 +190,7 @@ const AddListing = () => {
                   value={formData.title}
                   onChange={handleChange}
                   placeholder="e.g., 5-Bedroom Luxury Duplex"
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -194,7 +201,7 @@ const AddListing = () => {
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 >
                   <option value="Duplex">Duplex</option>
                   <option value="Terrace">Terrace</option>
@@ -211,7 +218,7 @@ const AddListing = () => {
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 >
                   <option value="sale">For Sale</option>
                   <option value="rent">For Rent</option>
@@ -228,18 +235,19 @@ const AddListing = () => {
                   value={formData.price}
                   onChange={handleChange}
                   placeholder="e.g., 85000000"
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
             </div>
           </div>
 
-          {/* Location Details */}
-          <div className="bg-background-surface border border-border p-8 rounded-sm shadow-sm">
-            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-primary-gold" />
-              Location Details
-            </h2>
+          {/* Section 02 — Location */}
+          <div className="py-10 border-b border-border">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-cormorant text-xs font-bold text-primary-gold tracking-[0.25em]">02</span>
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-primary font-inter">Location</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <label className="text-[10px] label-caps text-text-secondary font-bold">
@@ -249,7 +257,7 @@ const AddListing = () => {
                   name="location.city"
                   value={formData.location.city}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 >
                   <option value="Awka">Awka</option>
                   <option value="Onitsha">Onitsha</option>
@@ -274,7 +282,7 @@ const AddListing = () => {
                   value={formData.location.area}
                   onChange={handleChange}
                   placeholder="e.g., GRA"
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -285,18 +293,19 @@ const AddListing = () => {
                   disabled
                   type="text"
                   value="Anambra"
-                  className="w-full bg-background/50 border border-border px-4 py-3 text-sm font-inter outline-none rounded-sm cursor-not-allowed"
+                  className="bg-background-surface/50 border border-border px-4 py-3.5 text-sm font-inter outline-none w-full cursor-not-allowed"
                 />
               </div>
             </div>
           </div>
 
-          {/* Property Features */}
-          <div className="bg-background-surface border border-border p-8 rounded-sm shadow-sm">
-            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-primary-gold" />
-              Property Features
-            </h2>
+          {/* Section 03 — Property Features */}
+          <div className="py-10 border-b border-border">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-cormorant text-xs font-bold text-primary-gold tracking-[0.25em]">03</span>
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-primary font-inter">Property Features</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <label className="text-[10px] label-caps text-text-secondary font-bold">
@@ -308,7 +317,7 @@ const AddListing = () => {
                   name="bedrooms"
                   value={formData.bedrooms}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -321,7 +330,7 @@ const AddListing = () => {
                   name="bathrooms"
                   value={formData.bathrooms}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -334,7 +343,7 @@ const AddListing = () => {
                   name="size"
                   value={formData.size}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
               </div>
             </div>
@@ -349,12 +358,12 @@ const AddListing = () => {
                   value={newAmenity}
                   onChange={(e) => setNewAmenity(e.target.value)}
                   placeholder="e.g., Swimming Pool"
-                  className="flex-1 bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="flex-1 bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
                 <button
                   type="button"
                   onClick={addAmenity}
-                  className="w-full sm:w-auto bg-primary-gold text-background px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-all rounded-sm"
+                  className="w-full sm:w-auto bg-primary-gold text-background px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors"
                 >
                   Add
                 </button>
@@ -363,7 +372,7 @@ const AddListing = () => {
                 {formData.amenities.map((amenity) => (
                   <span
                     key={amenity}
-                    className="flex items-center gap-2 bg-background border border-border px-3 py-1.5 rounded-sm text-xs font-inter"
+                    className="flex items-center gap-2 bg-background border border-border px-3 py-1.5 text-xs font-inter"
                   >
                     {amenity}
                     <button
@@ -379,12 +388,13 @@ const AddListing = () => {
             </div>
           </div>
 
-          {/* Media & Agent */}
-          <div className="bg-background-surface border border-border p-8 rounded-sm shadow-sm">
-            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <div className="w-1 h-6 bg-primary-gold" />
-              Media & Agent
-            </h2>
+          {/* Section 04 — Media & Agent */}
+          <div className="py-10">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-cormorant text-xs font-bold text-primary-gold tracking-[0.25em]">04</span>
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-primary font-inter">Media & Agent</h2>
+              <div className="flex-1 h-px bg-border" />
+            </div>
             <div className="space-y-6">
               <div className="space-y-4">
                 <label className="text-[10px] label-caps text-text-secondary font-bold">
@@ -392,14 +402,13 @@ const AddListing = () => {
                 </label>
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center justify-center w-full">
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-sm cursor-pointer hover:border-primary-gold transition-colors group">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <Upload className="w-8 h-8 text-text-secondary group-hover:text-primary-gold transition-colors mb-2" />
-                        <p className="text-xs text-text-secondary group-hover:text-primary-gold transition-colors">
-                          <span className="font-bold">Click to upload</span> or
-                          drag and drop
+                    <label className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-border cursor-pointer hover:border-primary-gold transition-colors group">
+                      <div className="flex flex-col items-center justify-center">
+                        <Upload className="w-8 h-8 text-text-secondary group-hover:text-primary-gold transition-colors mb-3" />
+                        <p className="text-sm text-text-secondary group-hover:text-primary-gold transition-colors font-bold">
+                          Click to upload
                         </p>
-                        <p className="text-[10px] text-text-secondary opacity-60">
+                        <p className="text-[10px] text-text-secondary/60 mt-1">
                           PNG, JPG or WEBP (MAX. 5MB)
                         </p>
                       </div>
@@ -417,7 +426,7 @@ const AddListing = () => {
                   {formData.images.map((img, idx) => (
                     <div
                       key={idx}
-                      className="relative aspect-square border border-border rounded-sm overflow-hidden group"
+                      className="relative aspect-square border border-border overflow-hidden group"
                     >
                       <img
                         src={img}
@@ -427,7 +436,7 @@ const AddListing = () => {
                       <button
                         type="button"
                         onClick={() => removeImage(idx)}
-                        className="absolute top-1 right-1 p-1 bg-status-error text-white rounded-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 p-1 bg-status-error text-white opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -456,7 +465,7 @@ const AddListing = () => {
                   name="agent_id"
                   value={formData.agent_id}
                   onChange={handleChange}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 >
                   <option value="">Select an Agent</option>
                   {agents.map((agent) => (
@@ -477,7 +486,7 @@ const AddListing = () => {
                   value={formData.description}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm resize-none"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full resize-none"
                   placeholder="Detailed description of the property..."
                 />
               </div>
@@ -492,44 +501,38 @@ const AddListing = () => {
                   value={formData.video_url}
                   onChange={handleChange}
                   placeholder="e.g., https://www.youtube.com/watch?v=..."
-                  className="w-full bg-background border border-border px-4 py-3 text-sm font-inter outline-none focus:border-primary-gold transition-all rounded-sm"
+                  className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 />
                 <p className="text-[10px] text-text-secondary opacity-60">
                   YouTube, Vimeo or direct video link
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="featured"
-                  name="featured"
-                  checked={formData.featured}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      featured: e.target.checked,
-                    }))
-                  }
-                  className="w-4 h-4 accent-primary-gold"
-                />
-                <label
-                  htmlFor="featured"
-                  className="text-xs font-bold uppercase tracking-widest text-text-secondary cursor-pointer"
+              <div className="flex items-center gap-4 py-4 border border-border px-4">
+                <div className="flex-1">
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-text-primary">Featured Listing</p>
+                  <p className="text-[10px] text-text-secondary mt-0.5">Appears prominently on the homepage and listings page</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFormData(prev => ({ ...prev, featured: !prev.featured }))}
+                  className={`relative w-11 h-6 transition-colors flex-shrink-0 ${formData.featured ? 'bg-primary-gold' : 'bg-border'}`}
                 >
-                  Mark as Featured Listing
-                </label>
+                  <div className={`absolute top-1 w-4 h-4 bg-white transition-transform ${formData.featured ? 'translate-x-6' : 'translate-x-1'}`} />
+                </button>
               </div>
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-primary-gold text-background py-4 font-bold text-sm uppercase tracking-widest hover:bg-primary-lightGold transition-all rounded-sm shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? "Creating Listing..." : "Create Listing"}
-          </button>
+          <div className="pt-8">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-primary-gold text-background font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors disabled:opacity-50 flex items-center justify-center"
+            >
+              {loading ? "Creating Listing..." : "Create Listing"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

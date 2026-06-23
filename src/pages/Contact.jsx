@@ -26,14 +26,11 @@ const Contact = () => {
   return (
     <div className="pt-32 pb-20 bg-background min-h-screen">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-20">
-          <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
-            Connect With Us
-          </h4>
+        <div className="mb-20">
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-text-primary mb-6">
             Let's Talk Luxury
           </h1>
-          <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-text-secondary text-lg max-w-2xl leading-relaxed">
             Whether you're looking to acquire, lease, or list a premium
             property, our team of experts is ready to assist you.
           </p>

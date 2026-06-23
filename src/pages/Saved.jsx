@@ -45,7 +45,7 @@ const Saved = () => {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center py-20 md:py-32 text-center"
           >
-            <div className="w-24 h-24 bg-background-surface border border-border flex items-center justify-center rounded-full mb-8">
+            <div className="w-24 h-24 bg-background-surface border border-border flex items-center justify-center mb-8">
               <Heart className="w-10 h-10 text-text-secondary opacity-30" />
             </div>
             <h2 className="text-3xl font-playfair font-bold text-text-primary mb-4">Your collection is empty</h2>

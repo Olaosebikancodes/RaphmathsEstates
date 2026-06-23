@@ -8,19 +8,26 @@ import {
   Users,
   ChevronLeft,
   ChevronRight,
-  Star,
 } from "lucide-react";
 import { useProperties } from "../context/PropertyContext";
 import PropertyCard from "../components/PropertyCard";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "../utils/cn";
 
+const revealVariant = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 const Home = () => {
   const { getFeaturedProperties, properties } = useProperties();
   const featured = getFeaturedProperties().slice(0, 6);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const navigate = useNavigate();
-
   const [searchQuery, setSearchQuery] = useState("");
   const [searchCity, setSearchCity] = useState("all");
 
@@ -31,42 +38,41 @@ const Home = () => {
     navigate(url);
   };
 
-  const getCityCount = (city) => {
-    return properties.filter(
-      (p) => (p.location?.city?.toLowerCase() || "") === city.toLowerCase(),
+  const getCityCount = (city) =>
+    properties.filter(
+      (p) => (p.location?.city?.toLowerCase() || "") === city.toLowerCase()
     ).length;
-  };
 
   const locations = [
     {
       name: "Awka",
       count: getCityCount("Awka"),
-      image: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=2070&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Onitsha",
       count: getCityCount("Onitsha"),
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Nnewi",
       count: getCityCount("Nnewi"),
-      image: "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Ekwulobia",
       count: getCityCount("Ekwulobia"),
-      image: "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Ihiala",
       count: getCityCount("Ihiala"),
-      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      name: "Ozubulu",
-      count: getCityCount("Ozubulu"),
-      image: "https://images.unsplash.com/photo-1542362567-b05500282c14?q=80&w=2070&auto=format&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
     },
   ];
 
@@ -74,281 +80,273 @@ const Home = () => {
     {
       name: "Prince Ikechi",
       role: "Luxury Property Investor",
-      image: "/img/agent-benson.jpg",
       text: "Raphmaths Estates doesn't just sell houses; they deliver lifestyles. Their attention to detail and commitment to luxury is unparalleled in Anambra State.",
-      rating: 5,
     },
     {
       name: "Hon. Chuka Oladimeji",
       role: "Global Executive",
-      image: "/img/agent-sarah.jpg",
       text: "Trust and expertise are what I look for in a partner. Raphmaths Estates embodies both, providing world-class service every step of the way.",
-      rating: 5,
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const features = [
+    {
+      icon: Shield,
+      title: "Absolute Integrity",
+      desc: "We build lasting relationships through transparency and unwavering professional ethics.",
+    },
+    {
+      icon: Award,
+      title: "Local Expertise",
+      desc: "Deep-rooted knowledge of the Anambra luxury market ensures you make informed decisions.",
+    },
+    {
+      icon: Users,
+      title: "Bespoke Service",
+      desc: "Your vision is our blueprint. We tailor our services to your unique requirements.",
+    },
+  ];
 
   return (
     <div className="flex flex-col w-full">
-      {/* Hero Section */}
-      <section className="relative min-h-screen md:h-screen flex items-center justify-center overflow-hidden bg-background-surface">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat">
-          <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
+      {/* ── Hero ── */}
+      <section className="relative min-h-[100dvh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20 md:py-0 text-center">
-          <motion.h4
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="label-caps text-primary-gold mb-6 tracking-[0.3em] font-bold text-xs md:text-sm"
-          >
-            Premier Real Estate
-          </motion.h4>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-text-primary mb-12 leading-tight"
-          >
-            Where Luxury <br /> Finds Home
-          </motion.h1>
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 pt-28 pb-20">
+          <div className="max-w-xl">
+            <motion.h1
+              variants={revealVariant}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              className="text-5xl sm:text-6xl md:text-7xl font-playfair font-bold text-text-primary leading-[1.05] tracking-tight mb-6"
+            >
+              Where Luxury<br />
+              <span className="text-primary-gold italic pb-1 block">Finds Home</span>
+            </motion.h1>
 
-          {/* Search Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-background-surface/80 backdrop-blur-xl border border-border p-2 md:p-4 rounded-sm max-w-4xl mx-auto shadow-2xl mt-8 md:mt-0"
-          >
-            <div className="flex flex-col md:flex-row items-stretch gap-2 md:gap-4">
-              <div className="flex-1 flex items-center gap-4 px-4 border border-border md:border-0 md:border-r border-border py-4 md:py-0 rounded-sm md:rounded-none">
-                <Search className="text-primary-gold w-5 h-5 flex-shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Location or Property ID..."
-                  className="bg-transparent border-none outline-none text-text-primary placeholder:text-text-secondary w-full text-sm font-inter"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-                />
-              </div>
-              <div className="md:w-48 px-4 flex items-center gap-4 border border-border md:border-0 py-4 md:py-0 rounded-sm md:rounded-none">
-                <select
-                  className="bg-transparent border-none outline-none text-text-primary text-sm font-inter w-full cursor-pointer"
-                  value={searchCity}
-                  onChange={(e) => setSearchCity(e.target.value)}
+            <motion.p
+              variants={revealVariant}
+              initial="hidden"
+              animate="visible"
+              custom={0.15}
+              className="text-text-secondary text-base md:text-lg leading-relaxed mb-10 max-w-sm"
+            >
+              Premier properties across Anambra State. Verified listings, expert guidance.
+            </motion.p>
+
+            <motion.div
+              variants={revealVariant}
+              initial="hidden"
+              animate="visible"
+              custom={0.3}
+              className="bg-background-surface/90 backdrop-blur-xl border border-border p-2 max-w-lg"
+            >
+              <div className="flex flex-col sm:flex-row gap-0">
+                <div className="flex-1 flex items-center gap-3 px-4 py-3 border-b sm:border-b-0 sm:border-r border-border">
+                  <Search className="text-primary-gold w-4 h-4 flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Location or Property ID..."
+                    className="bg-transparent border-none outline-none text-text-primary placeholder:text-text-secondary w-full text-sm font-inter"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+                    aria-label="Search properties"
+                  />
+                </div>
+                <div className="flex sm:w-32 items-center px-4 py-3 border-b sm:border-b-0 sm:border-r border-border">
+                  <select
+                    className="bg-transparent border-none outline-none text-text-primary text-sm font-inter w-full cursor-pointer"
+                    value={searchCity}
+                    onChange={(e) => setSearchCity(e.target.value)}
+                    aria-label="Filter by city"
+                  >
+                    <option value="all" className="bg-background-surface">All Cities</option>
+                    <option value="awka" className="bg-background-surface">Awka</option>
+                    <option value="onitsha" className="bg-background-surface">Onitsha</option>
+                    <option value="nnewi" className="bg-background-surface">Nnewi</option>
+                    <option value="ekwulobia" className="bg-background-surface">Ekwulobia</option>
+                    <option value="ihiala" className="bg-background-surface">Ihiala</option>
+                    <option value="ozubulu" className="bg-background-surface">Ozubulu</option>
+                    <option value="obosi" className="bg-background-surface">Obosi</option>
+                    <option value="nkpor" className="bg-background-surface">Nkpor</option>
+                    <option value="ogidi" className="bg-background-surface">Ogidi</option>
+                    <option value="umunze" className="bg-background-surface">Umunze</option>
+                    <option value="otuocha" className="bg-background-surface">Otuocha</option>
+                    <option value="aguleri" className="bg-background-surface">Aguleri</option>
+                    <option value="ichi" className="bg-background-surface">Ichi</option>
+                    <option value="oraifite" className="bg-background-surface">Oraifite</option>
+                    <option value="ukpor" className="bg-background-surface">Ukpor</option>
+                    <option value="umuoji" className="bg-background-surface">Umuoji</option>
+                    <option value="okpoko" className="bg-background-surface">Okpoko</option>
+                    <option value="atani" className="bg-background-surface">Atani</option>
+                  </select>
+                </div>
+                <button
+                  onClick={handleSearch}
+                  className="bg-primary-gold text-background px-6 py-3 font-inter font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors active:scale-[0.98] whitespace-nowrap"
                 >
-                  <option value="all" className="bg-background-surface">
-                    All Cities
-                  </option>
-                  <option value="awka" className="bg-background-surface">
-                    Awka
-                  </option>
-                  <option value="onitsha" className="bg-background-surface">
-                    Onitsha
-                  </option>
-                  <option value="nnewi" className="bg-background-surface">
-                    Nnewi
-                  </option>
-                  <option value="ekwulobia" className="bg-background-surface">
-                    Ekwulobia
-                  </option>
-                  <option value="ihiala" className="bg-background-surface">
-                    Ihiala
-                  </option>
-                  <option value="ozubulu" className="bg-background-surface">
-                    Ozubulu
-                  </option>
-                  <option value="obosi" className="bg-background-surface">
-                    Obosi
-                  </option>
-                  <option value="nkpor" className="bg-background-surface">
-                    Nkpor
-                  </option>
-                  <option value="ogidi" className="bg-background-surface">
-                    Ogidi
-                  </option>
-                  <option value="umunze" className="bg-background-surface">
-                    Umunze
-                  </option>
-                  <option value="otuocha" className="bg-background-surface">
-                    Otuocha
-                  </option>
-                  <option value="aguleri" className="bg-background-surface">
-                    Aguleri
-                  </option>
-                  <option value="ichi" className="bg-background-surface">
-                    Ichi
-                  </option>
-                  <option value="oraifite" className="bg-background-surface">
-                    Oraifite
-                  </option>
-                  <option value="ukpor" className="bg-background-surface">
-                    Ukpor
-                  </option>
-                  <option value="umuoji" className="bg-background-surface">
-                    Umuoji
-                  </option>
-                  <option value="okpoko" className="bg-background-surface">
-                    Okpoko
-                  </option>
-                  <option value="atani" className="bg-background-surface">
-                    Atani
-                  </option>
-                </select>
+                  Search
+                </button>
               </div>
-              <button
-                onClick={handleSearch}
-                className="bg-primary-gold text-background px-8 py-5 md:py-3 font-inter font-bold text-xs md:text-sm tracking-wider uppercase hover:bg-primary-lightGold transition-all duration-300 rounded-sm"
-              >
-                Search Properties
-              </button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60"
-        >
-          <div className="w-[1px] h-12 bg-primary-gold" />
-          <span className="label-caps text-[10px] text-primary-gold">
-            Scroll
-          </span>
-        </motion.div>
       </section>
 
-      {/* Featured Listings */}
+      {/* ── Selected Residences ── */}
       <section className="py-20 md:py-32 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
-              <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
-                Our Collection
-              </h4>
-              <h2 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary leading-tight">
-                Featured Residences
-              </h2>
-            </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <motion.h2
+              variants={revealVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="text-4xl md:text-5xl font-playfair font-bold text-text-primary leading-tight"
+            >
+              Selected Residences
+            </motion.h2>
             <Link
               to="/listings"
-              className="flex items-center gap-2 text-primary-gold hover:text-primary-lightGold transition-colors font-inter text-sm font-bold uppercase tracking-widest group"
+              className="flex items-center gap-2 text-primary-gold hover:text-primary-lightGold transition-colors font-inter text-xs font-bold uppercase tracking-widest group shrink-0"
             >
-              View All Listings
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+              All Listings
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featured.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Raphmaths Estates */}
-      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface relative overflow-hidden">
-        {/* Background Accent */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-gold/5 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-20">
-            <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
-              The Raphmaths Estates Standard
-            </h4>
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary leading-tight">
-              Excellence in Every Detail
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                icon: Shield,
-                title: "Absolute Integrity",
-                desc: "We build lasting relationships through transparency and unwavering professional ethics.",
-              },
-              {
-                icon: Award,
-                title: "Local Expertise",
-                desc: "Deep-rooted knowledge of the Anambra State luxury market ensures you make informed decisions.",
-              },
-              {
-                icon: Users,
-                title: "Bespoke Service",
-                desc: "Your vision is our blueprint. We tailor our services to match your unique lifestyle requirements.",
-              },
-            ].map((feature, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {featured.map((property, idx) => (
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center group"
+                key={property.id}
+                variants={revealVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                custom={idx * 0.08}
               >
-                <div className="w-20 h-20 bg-background flex items-center justify-center border border-border group-hover:border-primary-gold transition-colors duration-500 mb-8 relative">
-                  <feature.icon className="w-8 h-8 text-primary-gold" />
-                  <div className="absolute inset-0 bg-primary-gold opacity-0 group-hover:opacity-5 transition-opacity" />
-                </div>
-                <h3 className="text-xl font-playfair font-bold text-text-primary mb-4">
-                  {feature.title}
-                </h3>
-                <p className="text-text-secondary text-sm leading-relaxed max-w-[280px]">
-                  {feature.desc}
-                </p>
+                <PropertyCard property={property} />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Locations */}
+      {/* ── The Standard ── */}
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
+            {/* Left: Statement + image */}
+            <motion.div
+              variants={revealVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-playfair font-bold text-text-primary leading-[1.2] mb-6">
+                Excellence in Every Detail
+              </h2>
+              <p className="text-text-secondary text-base leading-relaxed mb-8 max-w-md">
+                Anambra State's most trusted luxury property firm. We match families with the homes they deserve, guided by integrity and local knowledge.
+              </p>
+              <div className="h-px w-12 bg-primary-gold mb-10" />
+              <div className="relative h-64 md:h-80 overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop"
+                  alt="Luxury property interior"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background-surface/50 to-transparent" />
+              </div>
+            </motion.div>
+
+            {/* Right: Feature rows */}
+            <div className="flex flex-col divide-y divide-border">
+              {features.map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={revealVariant}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  custom={idx * 0.12}
+                  className="py-8 flex items-start gap-6 group"
+                >
+                  <div className="w-12 h-12 flex items-center justify-center border border-border group-hover:border-primary-gold transition-colors duration-300 flex-shrink-0">
+                    <feature.icon className="w-5 h-5 text-primary-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-text-primary mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      {feature.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Locations ── */}
       <section className="py-20 md:py-32 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
+          <motion.div
+            variants={revealVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-14"
+          >
+            <h4 className="font-cormorant uppercase tracking-[0.22em] text-primary-gold text-[11px] mb-4">
               Explore Locations
             </h4>
             <h2 className="text-4xl md:text-5xl font-playfair font-bold text-text-primary">
-              The Heart of Anambra State
+              The Heart of Anambra
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 [grid-template-rows:auto]">
             {locations.map((loc, idx) => (
               <Link
                 key={idx}
                 to={`/listings?city=${loc.name}`}
-                className="group relative h-96 overflow-hidden rounded-sm"
+                className={cn(
+                  "group relative overflow-hidden",
+                  idx === 0 ? "lg:col-span-2 h-80 md:h-[420px]" : "h-64 md:h-72"
+                )}
               >
                 <img
                   src={loc.image}
                   alt={loc.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80" />
-                <div className="absolute bottom-8 left-8">
-                  <h3 className="text-2xl font-playfair font-bold text-text-primary mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-xl md:text-2xl font-playfair font-bold text-text-primary mb-1.5">
                     {loc.name}
                   </h3>
                   <div className="flex items-center gap-2 text-primary-gold">
-                    <span className="label-caps text-[10px] font-bold">
-                      {loc.count} Properties
+                    <span className="font-cormorant uppercase text-[10px] tracking-widest font-bold">
+                      {loc.count} {loc.count === 1 ? "Property" : "Properties"}
                     </span>
-                    <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-2" />
+                    <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
@@ -357,118 +355,131 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
-              Client Success
-            </h4>
-            <h2 className="text-4xl font-playfair font-bold text-text-primary">
-              Whispers of Satisfaction
-            </h2>
-          </div>
-
-          <div className="relative p-12 bg-background border border-border shadow-2xl overflow-hidden">
-            {/* Background Quotes */}
-            <span className="absolute top-0 right-0 text-primary-gold/10 font-playfair text-[200px] leading-none select-none pointer-events-none -translate-y-1/4 translate-x-1/4">
-              "
-            </span>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTestimonial}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="relative z-10 flex flex-col items-center text-center"
-              >
-                <div className="flex items-center gap-1 mb-8 text-primary-gold">
-                  {[...Array(testimonials[activeTestimonial].rating)].map(
-                    (_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary-gold" />
-                    ),
-                  )}
-                </div>
-                <p className="text-xl md:text-2xl font-playfair italic text-text-primary leading-relaxed mb-10">
-                  "{testimonials[activeTestimonial].text}"
+      {/* ── Testimonials ── */}
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background-surface overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTestimonial}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-28 items-center"
+            >
+              {/* Quote */}
+              <div className="relative">
+                <span className="absolute -top-6 -left-2 text-primary-gold/10 font-playfair text-[140px] leading-none select-none pointer-events-none">
+                  "
+                </span>
+                <p className="relative z-10 text-2xl md:text-3xl font-playfair italic text-text-primary leading-relaxed">
+                  {testimonials[activeTestimonial].text}
                 </p>
+              </div>
+
+              {/* Attribution + controls */}
+              <div className="flex flex-col gap-8">
                 <div>
-                  <h5 className="font-playfair font-bold text-lg text-primary-gold">
+                  <div className="h-px w-12 bg-primary-gold mb-6" />
+                  <h5 className="font-playfair font-bold text-xl text-primary-gold mb-2">
                     {testimonials[activeTestimonial].name}
                   </h5>
-                  <p className="label-caps text-[10px] text-text-secondary mt-1">
+                  <p className="font-cormorant uppercase text-[10px] tracking-widest text-text-secondary">
                     {testimonials[activeTestimonial].role}
                   </p>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Carousel Controls */}
-            <div className="flex items-center justify-center gap-6 mt-12">
-              <button
-                onClick={() =>
-                  setActiveTestimonial((prev) =>
-                    prev === 0 ? testimonials.length - 1 : prev - 1,
-                  )
-                }
-                className="p-2 border border-border rounded-full hover:border-primary-gold transition-colors text-text-secondary hover:text-primary-gold"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <div className="flex gap-2">
-                {testimonials.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={cn(
-                      "w-1.5 h-1.5 rounded-full transition-all duration-300",
-                      activeTestimonial === idx
-                        ? "bg-primary-gold w-4"
-                        : "bg-border",
-                    )}
-                  />
-                ))}
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial((prev) =>
+                        prev === 0 ? testimonials.length - 1 : prev - 1
+                      )
+                    }
+                    className="p-3 border border-border hover:border-primary-gold text-text-secondary hover:text-primary-gold transition-colors active:scale-[0.97]"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <div className="flex gap-2 items-center">
+                    {testimonials.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveTestimonial(idx)}
+                        className={cn(
+                          "h-0.5 transition-all duration-300",
+                          activeTestimonial === idx
+                            ? "w-8 bg-primary-gold"
+                            : "w-3 bg-border"
+                        )}
+                        aria-label={`Testimonial ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    onClick={() =>
+                      setActiveTestimonial((prev) =>
+                        prev === testimonials.length - 1 ? 0 : prev + 1
+                      )
+                    }
+                    className="p-3 border border-border hover:border-primary-gold text-text-secondary hover:text-primary-gold transition-colors active:scale-[0.97]"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={() =>
-                  setActiveTestimonial((prev) =>
-                    prev === testimonials.length - 1 ? 0 : prev + 1,
-                  )
-                }
-                className="p-2 border border-border rounded-full hover:border-primary-gold transition-colors text-text-secondary hover:text-primary-gold"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-6 md:px-12 bg-background border-t border-border overflow-hidden relative">
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-text-primary mb-8 leading-tight">
-            Ready to find your <br />{" "}
-            <span className="text-primary-gold italic">dream sanctuary?</span>
-          </h2>
-          <p className="text-text-secondary text-lg mb-12 max-w-2xl mx-auto leading-relaxed font-inter">
-            Our agents are ready to provide you with a personalized tour of our
-            most exclusive properties.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link
-              to="/listings"
-              className="w-full sm:w-auto px-10 py-4 bg-primary-gold text-background font-inter font-bold uppercase tracking-widest hover:bg-primary-lightGold transition-all duration-300"
-            >
-              Browse Properties
-            </Link>
-            <Link
-              to="/contact"
-              className="w-full sm:w-auto px-10 py-4 border border-primary-gold text-primary-gold font-inter font-bold uppercase tracking-widest hover:bg-primary-gold hover:text-background transition-all duration-300"
-            >
-              Contact an Agent
-            </Link>
-          </div>
+      {/* ── CTA ── */}
+      <section className="py-20 md:py-32 px-6 md:px-12 bg-background">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            variants={revealVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-text-primary leading-[1.1] mb-6">
+              Find your next<br />
+              <span className="text-primary-gold italic pb-1 block">dream home</span>
+            </h2>
+            <p className="text-text-secondary text-base leading-relaxed mb-10 max-w-md">
+              Our agents are ready to guide you through Anambra's most exclusive properties.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                to="/listings"
+                className="px-8 py-4 bg-primary-gold text-background font-inter font-bold text-xs uppercase tracking-widest hover:bg-primary-lightGold transition-colors text-center active:scale-[0.98]"
+              >
+                Browse Properties
+              </Link>
+              <Link
+                to="/contact"
+                className="px-8 py-4 border border-primary-gold text-primary-gold font-inter font-bold text-xs uppercase tracking-widest hover:bg-primary-gold hover:text-background transition-colors text-center active:scale-[0.98]"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative h-80 lg:h-[500px] overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2040&auto=format&fit=crop"
+              alt="Luxury property exterior"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-primary-gold/5" />
+          </motion.div>
         </div>
       </section>
     </div>

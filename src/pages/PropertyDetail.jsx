@@ -124,7 +124,7 @@ const PropertyDetail = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => toggleFavorite(property.id)}
-              className="p-2 border border-border rounded-full text-text-primary hover:text-primary-gold transition-colors"
+              className="p-2 border border-border text-text-primary hover:text-primary-gold hover:border-primary-gold transition-colors"
             >
               <Heart
                 className={cn(
@@ -136,7 +136,7 @@ const PropertyDetail = () => {
             <div className="relative">
               <button
                 onClick={handleShare}
-                className="p-2 border border-border rounded-full text-text-primary hover:text-primary-gold transition-colors"
+                className="p-2 border border-border text-text-primary hover:text-primary-gold hover:border-primary-gold transition-colors"
               >
                 <Share2 className="w-4 h-4" />
               </button>
@@ -169,7 +169,7 @@ const PropertyDetail = () => {
                   prev === 0 ? property.images.length - 1 : prev - 1,
                 )
               }
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-background/50 backdrop-blur-md text-text-primary hover:text-primary-gold transition-colors rounded-full"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-background/50 backdrop-blur-md text-text-primary hover:text-primary-gold transition-colors"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -179,7 +179,7 @@ const PropertyDetail = () => {
                   prev === property.images.length - 1 ? 0 : prev + 1,
                 )
               }
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-background/50 backdrop-blur-md text-text-primary hover:text-primary-gold transition-colors rounded-full"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-background/50 backdrop-blur-md text-text-primary hover:text-primary-gold transition-colors"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -504,9 +504,6 @@ const PropertyDetail = () => {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
               <div>
-                <h4 className="label-caps text-primary-gold mb-4 tracking-[0.2em]">
-                  Recommendations
-                </h4>
                 <h2 className="text-4xl font-playfair font-bold text-text-primary">
                   Curated for You
                 </h2>

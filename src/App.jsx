@@ -25,6 +25,7 @@ import AddAgent from "./pages/AddAgent";
 
 function App() {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <ToastProvider>
@@ -34,6 +35,7 @@ function App() {
           <ToastContainer />
           <Analytics />
           <div className="min-h-screen w-full bg-background flex flex-col overflow-x-hidden relative">
+            {!isAdminRoute && <Navbar />}
             <main className="flex-grow w-full">
               <AnimatePresence mode="wait">
                 <Routes location={location} key={location.pathname}>
@@ -128,8 +130,7 @@ function App() {
                 </Routes>
               </AnimatePresence>
             </main>
-            <Navbar />
-            <Footer />
+            {!isAdminRoute && <Footer />}
           </div>
         </FavoritesProvider>
       </PropertyProvider>
