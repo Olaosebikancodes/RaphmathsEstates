@@ -1,0 +1,47 @@
+[
+  {
+    "id": "agent_001",
+    "name": "Chidi Okafor",
+    "role": "Luxury Property Expert",
+    "phone": "+234 801 234 5678",
+    "whatsapp": "+234 801 234 5678",
+    "email": "chidi@raphmathsestates.com",
+    "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+    "social": {
+      "instagram": "https://instagram.com/chidi_estates",
+      "twitter": "https://twitter.com/chidi_estates",
+      "facebook": "https://facebook.com/chidi.okafor"
+    },
+    "bio": "With over 10 years of experience in the luxury real estate market in Anambra, Chidi has a proven track record of finding the perfect homes for his clients."
+  },
+  {
+    "id": "agent_002",
+    "name": "Sarah Emetulu",
+    "role": "Residential Specialist",
+    "phone": "+234 802 345 6789",
+    "whatsapp": "+234 802 345 6789",
+    "email": "sarah@raphmathsestates.com",
+    "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
+    "social": {
+      "instagram": "https://instagram.com/sarah_homes",
+      "twitter": "https://twitter.com/sarah_homes",
+      "facebook": "https://facebook.com/sarah.emetulu"
+    },
+    "bio": "Sarah specializes in residential properties and has an in-depth knowledge of the best neighborhoods in Onitsha and Awka."
+  },
+  {
+    "id": "agent_003",
+    "name": "Benson Udoh",
+    "role": "Commercial Real Estate Advisor",
+    "phone": "+234 803 456 7890",
+    "whatsapp": "+234 803 456 7890",
+    "email": "benson@raphmathsestates.com",
+    "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
+    "social": {
+      "instagram": "https://instagram.com/benson_commercial",
+      "twitter": "https://twitter.com/benson_commercial",
+      "facebook": "https://facebook.com/benson.udoh"
+    },
+    "bio": "Benson is our go-to expert for commercial properties and large-scale investments in Nnewi and surrounding areas."
+  }
+]
