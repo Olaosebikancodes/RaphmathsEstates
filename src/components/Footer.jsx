@@ -68,11 +68,14 @@ const Footer = () => {
           </h4>
           <ul className="flex flex-col gap-3 text-sm text-text-secondary">
             {[
-              { label: "Awka", city: "Awka" },
-              { label: "Onitsha", city: "Onitsha" },
-              { label: "Nnewi", city: "Nnewi" },
-              { label: "Ekwulobia", city: "Ekwulobia" },
-              { label: "Ihiala", city: "Ihiala" },
+              { label: "Awka1", city: "Awka1" },
+              { label: "Awka2", city: "Awka2" },
+              { label: "Awka3", city: "Awka3" },
+              { label: "Nkwelle1", city: "Nkwelle1" },
+              { label: "Nkwelle2", city: "Nkwelle2" },
+              { label: "2nd Niger Bridge Onitsha", city: "2nd Niger Bridge Onitsha" },
+              { label: "Obosi", city: "Obosi" },
+              { label: "Asaba", city: "Asaba" },
             ].map(({ label, city }) => (
               <li key={city}>
                 <Link

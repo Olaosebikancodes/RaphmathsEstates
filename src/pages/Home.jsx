@@ -45,34 +45,52 @@ const Home = () => {
 
   const locations = [
     {
-      name: "Awka",
-      count: getCityCount("Awka"),
+      name: "Awka1",
+      count: getCityCount("Awka1"),
       image:
         "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Asaba",
-      count: getCityCount("Asaba"),
+      name: "Awka2",
+      count: getCityCount("Awka2"),
       image:
         "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Asaba",
-      count: getCityCount("Asaba"),
+      name: "Awka3",
+      count: getCityCount("Awka3"),
       image:
         "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Nkwelle",
-      count: getCityCount("Nkwelle"),
+      name: "Nkwelle1",
+      count: getCityCount("Nkwelle1"),
       image:
         "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
+    },
+    {
+      name: "Nkwelle2",
+      count: getCityCount("Nkwelle2"),
+      image:
+        "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "2nd Niger Bridge Onitsha",
       count: getCityCount("2nd Niger Bridge Onitsha"),
       image:
-        "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1480074568708-e7c588ab8a25?q=80&w=2070&auto=format&fit=crop",
+    },
+    {
+      name: "Obosi",
+      count: getCityCount("Obosi"),
+      image:
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+    },
+    {
+      name: "Asaba",
+      count: getCityCount("Asaba"),
+      image:
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
     },
   ];
 
@@ -172,25 +190,15 @@ const Home = () => {
                     onChange={(e) => setSearchCity(e.target.value)}
                     aria-label="Filter by city"
                   >
-                    <option value="all" className="bg-background-surface">All Cities</option>
-                    <option value="awka" className="bg-background-surface">Awka</option>
-                    <option value="onitsha" className="bg-background-surface">Onitsha</option>
-                    <option value="nnewi" className="bg-background-surface">Nnewi</option>
-                    <option value="ekwulobia" className="bg-background-surface">Ekwulobia</option>
-                    <option value="ihiala" className="bg-background-surface">Ihiala</option>
-                    <option value="ozubulu" className="bg-background-surface">Ozubulu</option>
-                    <option value="obosi" className="bg-background-surface">Obosi</option>
-                    <option value="nkpor" className="bg-background-surface">Nkpor</option>
-                    <option value="ogidi" className="bg-background-surface">Ogidi</option>
-                    <option value="umunze" className="bg-background-surface">Umunze</option>
-                    <option value="otuocha" className="bg-background-surface">Otuocha</option>
-                    <option value="aguleri" className="bg-background-surface">Aguleri</option>
-                    <option value="ichi" className="bg-background-surface">Ichi</option>
-                    <option value="oraifite" className="bg-background-surface">Oraifite</option>
-                    <option value="ukpor" className="bg-background-surface">Ukpor</option>
-                    <option value="umuoji" className="bg-background-surface">Umuoji</option>
-                    <option value="okpoko" className="bg-background-surface">Okpoko</option>
-                    <option value="atani" className="bg-background-surface">Atani</option>
+                    <option value="all" className="bg-background-surface">All Locations</option>
+                    <option value="Awka1" className="bg-background-surface">Awka1</option>
+                    <option value="Awka2" className="bg-background-surface">Awka2</option>
+                    <option value="Awka3" className="bg-background-surface">Awka3</option>
+                    <option value="Nkwelle1" className="bg-background-surface">Nkwelle1</option>
+                    <option value="Nkwelle2" className="bg-background-surface">Nkwelle2</option>
+                    <option value="2nd Niger Bridge Onitsha" className="bg-background-surface">2nd Niger Bridge Onitsha</option>
+                    <option value="Obosi" className="bg-background-surface">Obosi</option>
+                    <option value="Asaba" className="bg-background-surface">Asaba</option>
                   </select>
                 </div>
                 <button

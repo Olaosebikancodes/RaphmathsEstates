@@ -253,16 +253,14 @@ const EditListing = () => {
                   onChange={handleChange}
                   className="bg-background-surface border border-border px-4 py-3.5 text-sm font-inter outline-none focus:border-primary-gold transition-colors w-full"
                 >
-                  <option value="Awka">Awka</option>
-                  <option value="Onitsha">Onitsha</option>
-                  <option value="Nnewi">Nnewi</option>
-                  <option value="Ekwulobia">Ekwulobia</option>
-                  <option value="Ihiala">Ihiala</option>
-                  <option value="Ozubulu">Ozubulu</option>
+                  <option value="Awka1">Awka1</option>
+                  <option value="Awka2">Awka2</option>
+                  <option value="Awka3">Awka3</option>
+                  <option value="Nkwelle1">Nkwelle1</option>
+                  <option value="Nkwelle2">Nkwelle2</option>
+                  <option value="2nd Niger Bridge Onitsha">2nd Niger Bridge Onitsha</option>
                   <option value="Obosi">Obosi</option>
-                  <option value="Nkpor">Nkpor</option>
-                  <option value="Ogidi">Ogidi</option>
-                  <option value="Umunze">Umunze</option>
+                  <option value="Asaba">Asaba</option>
                 </select>
               </div>
               <div className="space-y-2">

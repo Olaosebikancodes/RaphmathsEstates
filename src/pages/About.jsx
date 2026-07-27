@@ -48,7 +48,7 @@ const About = () => {
               Our commitment to excellence, integrity, and bespoke service has
               made us the premier choice for high-net-worth individuals and
               corporate entities looking for the most exclusive properties in
-              Awka, Onitsha, Nnewi, and Ekwulobia.
+              Awka1, Awka2, Awka3, Nkwelle1, Nkwelle2, 2nd Niger Bridge Onitsha, Obosi, and Asaba.
             </p>
           </motion.div>
 

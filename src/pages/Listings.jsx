@@ -19,9 +19,8 @@ import { cn } from "../utils/cn";
 const ITEMS_PER_PAGE = 6;
 
 const CITIES = [
-  "All", "Awka", "Onitsha", "Nnewi", "Ekwulobia", "Ihiala",
-  "Ozubulu", "Obosi", "Nkpor", "Ogidi", "Umunze", "Otuocha",
-  "Aguleri", "Ichi", "Oraifite", "Ukpor", "Umuoji", "Okpoko", "Atani",
+  "All", "Awka1", "Awka2", "Awka3", "Nkwelle1", "Nkwelle2",
+  "2nd Niger Bridge Onitsha", "Obosi", "Asaba",
 ];
 
 const revealVariant = {

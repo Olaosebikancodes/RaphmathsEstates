@@ -417,7 +417,7 @@ const Admin = () => {
                     className="bg-background-surface border border-border px-4 py-3.5 text-[10px] font-bold label-caps outline-none focus:border-primary-gold cursor-pointer transition-all"
                   >
                     <option>All Cities</option>
-                    {["Awka","Onitsha","Nnewi","Ekwulobia","Ihiala","Ozubulu","Obosi","Nkpor","Ogidi","Umunze","Otuocha","Aguleri","Ichi","Oraifite","Ukpor","Umuoji","Okpoko","Atani"].map(c => (
+                    {["Awka1","Awka2","Awka3","Nkwelle1","Nkwelle2","2nd Niger Bridge Onitsha","Obosi","Asaba"].map(c => (
                       <option key={c}>{c}</option>
                     ))}
                   </select>
