@@ -329,14 +329,14 @@ const Home = () => {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 [grid-template-rows:auto]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {locations.map((loc, idx) => (
               <Link
                 key={idx}
                 to={`/listings?city=${loc.name}`}
                 className={cn(
-                  "group relative overflow-hidden",
-                  idx === 0 ? "lg:col-span-2 h-80 md:h-[420px]" : "h-64 md:h-72"
+                  "group relative overflow-hidden h-80 md:h-[420px]",
+                  idx === 0 ? "lg:col-span-2" : ""
                 )}
               >
                 <img
