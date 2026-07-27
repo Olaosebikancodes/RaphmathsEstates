@@ -51,26 +51,26 @@ const Home = () => {
         "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Onitsha",
-      count: getCityCount("Onitsha"),
+      name: "Asaba",
+      count: getCityCount("Asaba"),
       image:
         "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Nnewi",
-      count: getCityCount("Nnewi"),
+      name: "Asaba",
+      count: getCityCount("Asaba"),
       image:
         "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Ekwulobia",
-      count: getCityCount("Ekwulobia"),
+      name: "Nkwelle",
+      count: getCityCount("Nkwelle"),
       image:
         "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Ihiala",
-      count: getCityCount("Ihiala"),
+      name: "2nd Niger Bridge Onitsha",
+      count: getCityCount("2nd Niger Bridge Onitsha"),
       image:
         "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop",
     },
