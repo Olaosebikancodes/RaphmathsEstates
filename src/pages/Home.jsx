@@ -66,7 +66,7 @@ const Home = () => {
       name: "Nkwelle1",
       count: getCityCount("Nkwelle1"),
       image:
-        "https://images.unsplash.com/photo-1518005020251-58296b97bc6c?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Nkwelle2",
@@ -78,7 +78,7 @@ const Home = () => {
       name: "2nd Niger Bridge Onitsha",
       count: getCityCount("2nd Niger Bridge Onitsha"),
       image:
-        "https://images.unsplash.com/photo-1480074568708-e7c588ab8a25?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Obosi",
