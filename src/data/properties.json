@@ -1,0 +1,259 @@
+[
+  {
+    "id": "prop_001",
+    "title": "5-Bedroom Luxury Duplex",
+    "type": "Duplex",
+    "status": "sale",
+    "price": 85000000,
+    "location": {
+      "city": "Awka",
+      "state": "Anambra",
+      "area": "Ifite",
+      "coordinates": { "lat": 6.2104, "lng": 7.0667 }
+    },
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "size": 420,
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "A stunning modern duplex with premium finishes and state-of-the-art facilities located in the heart of Awka's most prestigious neighborhood.",
+    "amenities": ["Pool", "24/7 Security", "Generator", "CCTV", "Parking"],
+    "agent": "agent_001",
+    "featured": true,
+    "dateAdded": "2026-03-15"
+  },
+  {
+    "id": "prop_002",
+    "title": "Modern 4-Bedroom Terrace",
+    "type": "Terrace",
+    "status": "sale",
+    "price": 65000000,
+    "location": {
+      "city": "Onitsha",
+      "state": "Anambra",
+      "area": "GRA",
+      "coordinates": { "lat": 6.1333, "lng": 6.7833 }
+    },
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size": 350,
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600607687940-4e2a09695d51?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "An exquisite terrace house offering modern living in a secure gated community in Onitsha, Anambra.",
+    "amenities": ["24/7 Security", "Borehole", "Green Area", "Parking"],
+    "agent": "agent_002",
+    "featured": true,
+    "dateAdded": "2026-03-20"
+  },
+  {
+    "id": "prop_003",
+    "title": "Luxury Waterfront Villa",
+    "type": "Villa",
+    "status": "rent",
+    "price": 5000000,
+    "location": {
+      "city": "Nnewi",
+      "state": "Anambra",
+      "area": "Otolo",
+      "coordinates": { "lat": 6.0167, "lng": 6.9167 }
+    },
+    "bedrooms": 6,
+    "bathrooms": 7,
+    "size": 600,
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2092&auto=format&fit=crop"
+    ],
+    "description": "Breathtaking luxury villa in Nnewi, Anambra. Perfect for high-end residential or corporate use.",
+    "amenities": [
+      "Pool",
+      "Gym",
+      "Private Dock",
+      "24/7 Security",
+      "Solar System"
+    ],
+    "agent": "agent_003",
+    "featured": true,
+    "dateAdded": "2026-04-01"
+  },
+  {
+    "id": "prop_004",
+    "title": "3-Bedroom Executive Apartment",
+    "type": "Apartment",
+    "status": "rent",
+    "price": 2500000,
+    "location": {
+      "city": "Awka",
+      "state": "Anambra",
+      "area": "Ifite",
+      "coordinates": { "lat": 6.2104, "lng": 7.0667 }
+    },
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size": 180,
+    "images": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop"
+    ],
+    "description": "Spacious and modern apartment in a prime location in Awka. Ideal for professionals.",
+    "amenities": ["Security", "Parking", "Water Treatment"],
+    "agent": "agent_001",
+    "featured": true,
+    "dateAdded": "2026-04-05"
+  },
+  {
+    "id": "prop_005",
+    "title": "Modern 4-Bedroom Semi-Detached Duplex",
+    "type": "Duplex",
+    "status": "sale",
+    "price": 75000000,
+    "location": {
+      "city": "Awka",
+      "state": "Anambra",
+      "area": "Ngozika Estate",
+      "coordinates": { "lat": 6.2204, "lng": 7.0867 }
+    },
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size": 320,
+    "images": [
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "Contemporary semi-detached duplex in the exclusive Ngozika Estate. Features automated gates and premium kitchen fittings.",
+    "amenities": ["Smart Home", "24/7 Security", "Inverter System", "Parking"],
+    "agent": "agent_001",
+    "featured": true,
+    "dateAdded": "2026-04-10"
+  },
+  {
+    "id": "prop_006",
+    "title": "Luxury 3-Bedroom Penthouse",
+    "type": "Apartment",
+    "status": "rent",
+    "price": 4500000,
+    "location": {
+      "city": "Onitsha",
+      "state": "Anambra",
+      "area": "GRA Phase 2",
+      "coordinates": { "lat": 6.1433, "lng": 6.7933 }
+    },
+    "bedrooms": 3,
+    "bathrooms": 4,
+    "size": 250,
+    "images": [
+      "https://images.unsplash.com/photo-1512918766674-ed62b979a83f?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "Stunning penthouse overlooking the city. Features a private rooftop terrace and floor-to-ceiling windows.",
+    "amenities": ["Elevator", "Rooftop Terrace", "Gym", "Concierge"],
+    "agent": "agent_002",
+    "featured": true,
+    "dateAdded": "2026-04-12"
+  },
+  {
+    "id": "prop_007",
+    "title": "Classic 5-Bedroom Mansionette",
+    "type": "Villa",
+    "status": "sale",
+    "price": 120000000,
+    "location": {
+      "city": "Nnewi",
+      "state": "Anambra",
+      "area": "Otolo",
+      "coordinates": { "lat": 6.0267, "lng": 6.9267 }
+    },
+    "bedrooms": 5,
+    "bathrooms": 6,
+    "size": 550,
+    "images": [
+      "https://images.unsplash.com/photo-1600047509789-10d29d16be5e?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6f3ea?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "An architectural masterpiece in Nnewi's most elite neighborhood. Built with imported marble and premium wood finishes.",
+    "amenities": ["Private Cinema", "Wine Cellar", "Pool", "Large Garden"],
+    "agent": "agent_003",
+    "featured": true,
+    "dateAdded": "2026-04-14"
+  },
+  {
+    "id": "prop_008",
+    "title": "Elegant 2-Bedroom Suite",
+    "type": "Apartment",
+    "status": "rent",
+    "price": 1800000,
+    "location": {
+      "city": "Ekwulobia",
+      "state": "Anambra",
+      "area": "City Center",
+      "coordinates": { "lat": 6.0333, "lng": 7.0833 }
+    },
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size": 120,
+    "images": [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=2074&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493200066230-148630400dec?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "Modern suites perfect for corporate expatriates or small families. Secure and well-serviced.",
+    "amenities": ["24/7 Power", "Security", "Water Treatment", "Laundry"],
+    "agent": "agent_003",
+    "featured": true,
+    "dateAdded": "2026-04-15"
+  },
+  {
+    "id": "prop_009",
+    "title": "Premium 4-Bedroom Detached Duplex",
+    "type": "Duplex",
+    "status": "sale",
+    "price": 95000000,
+    "location": {
+      "city": "Onitsha",
+      "state": "Anambra",
+      "area": "Fegge",
+      "coordinates": { "lat": 6.1233, "lng": 6.7733 }
+    },
+    "bedrooms": 4,
+    "bathrooms": 5,
+    "size": 380,
+    "images": [
+      "https://images.unsplash.com/photo-1512915922686-57c11fd9b6b3?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "description": "A spacious and secure detached duplex in a developing high-end area of Onitsha. High appreciation potential.",
+    "amenities": ["CCTV", "Electric Fence", "Generator House", "Boys Quarters"],
+    "agent": "agent_002",
+    "featured": true,
+    "dateAdded": "2026-04-16"
+  },
+  {
+    "id": "prop_010",
+    "title": "Zen 6-Bedroom Estate Villa",
+    "type": "Villa",
+    "status": "sale",
+    "price": 150000000,
+    "location": {
+      "city": "Awka",
+      "state": "Anambra",
+      "area": "Enugu-Agidi",
+      "coordinates": { "lat": 6.2304, "lng": 7.1067 }
+    },
+    "bedrooms": 6,
+    "bathrooms": 8,
+    "size": 750,
+    "images": [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop"
+    ],
+    "description": "An sprawling estate villa with modern Zen-inspired architecture. Features a private mini-golf course and a swimming pool.",
+    "amenities": ["Mini Golf", "Infinity Pool", "Smart Lighting", "Security Post"],
+    "agent": "agent_001",
+    "featured": true,
+    "dateAdded": "2026-04-17"
+  }
+]
