@@ -57,8 +57,8 @@ const Home = () => {
         "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
     },
     {
-      name: "Obosi",
-      count: getCityCount("Obosi"),
+      name: "Asaba",
+      count: getCityCount("Asaba"),
       image:
         "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop",
     },
